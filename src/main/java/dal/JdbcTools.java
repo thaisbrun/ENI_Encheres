@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import conf.Settings;
+
 public class JdbcTools {
 	private static String urldb;
 	private static String userdb;
@@ -16,4 +18,5 @@ public class JdbcTools {
 	public static Connection getConnection() throws SQLException{
 	Connection connection = DriverManager.getConnection(urldb, userdb, passworddb);
 	return connection;
+}
 }
