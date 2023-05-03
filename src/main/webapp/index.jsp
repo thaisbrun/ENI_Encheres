@@ -24,7 +24,7 @@
           <a class="nav-link active" aria-current="page" href="#">S'inscrire</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Se connecter</a>
+          <a class="nav-link active" href="./connexion">Se connecter</a>
         </li>
       </ul>
       </form>
