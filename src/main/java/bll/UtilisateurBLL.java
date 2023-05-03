@@ -1,26 +1,20 @@
 package bll;
-import java.util.List;
 
-import bo.Utilisateur;
 import dal.DAOFactory;
 import dal.UtilisateurDAO;
 
 public class UtilisateurBLL {
-	private UtilisateurDAO dao;
+	private static UtilisateurBLL instance;
+	private UtilisateurDAO utilisateurDAO;
 	
 	public UtilisateurBLL() {
-		dao = DAOFactory.getUtilisateurDAO();
+		enchereDAO = DAOFactory.getArticleDAO();
 	}
 	
-	public List<Utilisateur> selectAll() {
-		return dao.selectAll();
-	}
-	
-	public Utilisateur selectById(int id) {
-		return dao.selectById(id);
-	}
-	
-	public void insert(Utilisateur utilisateur) {
-		dao.insert(utilisateur);
+	public static UtilisateurBLL getInstance() {
+		if (UtilisateurBLL.instance == null) {
+			UtilisateurBLL.instance = new UtilisateurBLL();
+		return instance;
+		}
 	}
 }

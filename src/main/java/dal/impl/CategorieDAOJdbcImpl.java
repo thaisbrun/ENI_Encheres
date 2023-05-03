@@ -20,7 +20,6 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	private static final String SELECT_ALL = "SELECT * FROM categories;";
 	//private static final String SELECT_BY_ID = "SELECT * FROM repas r LEFT JOIN aliments a ON r.id = a.id_repas WHERE r.id = ?;";
 	//private static final String INSERT = "INSERT INTO repas(date_repas, heure_repas) VALUES (?,?);";
-	//private static final String INSERT_ALIMENT = "INSERT INTO aliments(nom, id_repas) VALUES (?,?);";
 
 	@Override
 	public List<Categorie> selectAll() {

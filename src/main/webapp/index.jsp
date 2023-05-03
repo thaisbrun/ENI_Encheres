@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +31,7 @@
     </div>
   </div>
 </nav>
-	<h1>Liste des enchères</h1>
+	<h1>Bienvenue</h1>
 <br>
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Filtres : </label>

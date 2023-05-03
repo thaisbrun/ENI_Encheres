@@ -1,18 +1,23 @@
 package bll;
 
+import java.util.List;
+
+import bo.Enchere;
 import dal.DAOFactory;
+import dal.EnchereDAO;
 
 public class EnchereBLL {
-	private static EnchereBLL instance;
-	private EnchereDAO enchereDAO;
+	private EnchereDAO dao;
 	
-	private EnchereBLL() {
-		enchereDAO = DAOFactory.getArticleDAO();
+	public EnchereBLL() {
+		dao = DAOFactory.getEnchereDAO();
 	}
 	
-	public static EnchereBLL getInstance() {
-		if (EnchereBLL.instance == null) {
-			EnchereBLL.instance = new EnchereBLL();
-		return instance;
+	public List<Enchere> selectAll() {
+		return dao.selectAll();
+	}
+	
+	public Enchere selectById(int id) {
+		return dao.selectById(id);
 	}
 }
