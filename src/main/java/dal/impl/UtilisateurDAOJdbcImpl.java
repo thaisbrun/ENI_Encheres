@@ -1,3 +1,5 @@
+package dal.impl;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -9,22 +11,22 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import bo.Categorie;
-import dal.CategorieDAO;
+import bo.Utilisateur;
 import dal.ConnectionProvider;
+import dal.UtilisateurDAO;
 
 /*
  * Implémentation des méthodes proposées par RepasDAO
  */
-public class CategorieDAOJdbcImpl implements CategorieDAO {
-	private static final String SELECT_ALL = "SELECT * FROM categories;";
+public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
+	private static final String SELECT_ALL = "SELECT * FROM utilisateurs;";
 	//private static final String SELECT_BY_ID = "SELECT * FROM repas r LEFT JOIN aliments a ON r.id = a.id_repas WHERE r.id = ?;";
 	//private static final String INSERT = "INSERT INTO repas(date_repas, heure_repas) VALUES (?,?);";
 	//private static final String INSERT_ALIMENT = "INSERT INTO aliments(nom, id_repas) VALUES (?,?);";
 
 	@Override
-	public List<Categorie> selectAll() {
-		List<Categorie> resultat = new ArrayList<>();
+	public List<Utilisateur> selectAll() {
+		List<Utilisateur> resultat = new ArrayList<>();
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			// 2e etape : preparer la requete SQL qu'on souhaite executer
@@ -32,12 +34,14 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 			// 4e etape : execution de la requete et interpretation des resultats
 			ResultSet rs = ps.executeQuery();
 			
-			Categorie categorie = new Categorie();
+			Utilisateur utilisateur = new Utilisateur();
 
-				int numero = categorie.getNumero();
-				String libelle = categorie.getLibelle();
-		
-			resultat.add(categorie);
+				int numero = utilisateur.getNoUtilisateur();
+				String prenom = utilisateur.getPrenom();
+				String nom = utilisateur.getNom();
+				String email = utilisateur.getEmail();
+				int telephone = utilisateur.getTelephone();
+			resultat.add(utilisateur);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,12 +49,12 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 		return resultat;
 	}
 	@Override
-	public Categorie selectById(int id) {
+	public Utilisateur selectById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public void insert(Categorie categorie) {
+	public void insert(Utilisateur utilisateur) {
 		// TODO Auto-generated method stub
 		
 	}

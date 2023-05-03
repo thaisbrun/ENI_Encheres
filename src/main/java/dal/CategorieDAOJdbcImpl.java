@@ -1,3 +1,5 @@
+package dal;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Categorie;
-import dal.CategorieDAO;
-import dal.ConnectionProvider;
 
 /*
  * Implémentation des méthodes proposées par RepasDAO

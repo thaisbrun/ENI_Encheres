@@ -24,13 +24,13 @@
 		</thead>
 		<tbody>
 		<br>
-			<% for (Categorie current : listeCategories) { %>
+			<% for (Categorie categorie : listeCategories) { %>
 				<tr>
 					
-							<p><%= current.getNumero() %></p>
+							<p><%= categorie.getNumero() %></p>
 				</tr>
 				<tr>
-							<p><%= current.getLibelle()%></p>
+							<p><%= categorie.getLibelle()%></p>
 				</tr>
 			<% } %>
 		</tbody>
