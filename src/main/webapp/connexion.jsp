@@ -31,20 +31,6 @@
     </div>
   </div>
 </nav>
-	<h1>Liste des enchères</h1>
-<br>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Filtres : </label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Le nom de l'article contient">
-<button type="button" class="btn btn-primary">Rechercher</button>
-</div>
-<div class="mb-3">
-<select class="form-select" aria-label="Default select example">
-  <option selected>Toutes</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
-</div>
+
 </body>
 </html>

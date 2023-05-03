@@ -1,6 +1,7 @@
 package bo;
 
 public class Categorie {
+	
 	private int numero;	
 	private String libelle;
 	
