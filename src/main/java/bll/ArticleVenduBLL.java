@@ -1,5 +1,6 @@
 package bll;
 
+import dal.ArticleVenduDAO;
 import dal.DAOFactory;
 
 public class ArticleVenduBLL {
@@ -7,7 +8,7 @@ public class ArticleVenduBLL {
 	private ArticleVenduDAO articleVenduDAO;
 	
 	private ArticleVenduBLL() {
-		UtilisateurDAO = DAOFactory.getArticleDAO();
+		ArticleVenduDAO = DAOFactory.getArticleDAO();
 	}
 	
 	public static ArticleVenduBLL getInstance() {

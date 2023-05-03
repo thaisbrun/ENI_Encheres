@@ -4,11 +4,15 @@ import java.util.List;
 
 import bo.Utilisateur;
 
-/*
- * Définition des méthodes utilisées auprès de la BDD
- */
 public interface UtilisateurDAO {
-	List<Utilisateur> selectAll();
-	Utilisateur selectById(int id);
-	void insert(Utilisateur utilisateur);
+	
+	public void insert(Utilisateur utilisateur) throws DALException;
+	
+	public void update(Utilisateur utilisateur) throws DALException;
+	
+	public void delete(int noArticle) throws DALException;
+	
+	public Utilisateur selectById(Integer noArticle) throws DALException;
+	
+	public List<Utilisateur> selectAll() throws DALException;
 }

@@ -13,11 +13,12 @@ public class ArticleVendu {
 	private double miseAPrix;
 	private double prixVente;
 	private String etatVente;
-	private List<Retrait> lieuRetrait;
+	private Retrait lieuRetrait;
+	private Utilisateur utilisateur;
 	
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, double miseAPrix, double prixVente, String etatVente,
-			List<Retrait> lieuRetrait) {
+			LocalDateTime dateFinEncheres, double miseAPrix, double prixVente, String etatVente, Retrait lieuRetrait,
+			Utilisateur utilisateur) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -28,6 +29,7 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 		this.lieuRetrait = lieuRetrait;
+		this.utilisateur = utilisateur;
 	}
 	
 	public ArticleVendu() {}
@@ -96,11 +98,19 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 
-	public List<Retrait> getLieuRetrait() {
+	public Retrait getLieuRetrait() {
 		return lieuRetrait;
 	}
 
-	public void setLieuRetrait(List<Retrait> lieuRetrait) {
+	public void setLieuRetrait(Retrait lieuRetrait) {
 		this.lieuRetrait = lieuRetrait;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 }

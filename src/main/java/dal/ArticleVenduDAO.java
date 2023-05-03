@@ -4,7 +4,7 @@ import java.util.List;
 
 import bo.ArticleVendu;
 
-public class ArticleVenduDAO {
+public interface ArticleVenduDAO {
 	
 	public void insert(ArticleVendu articleVendu) throws DALException;
 	
@@ -15,5 +15,4 @@ public class ArticleVenduDAO {
 	public ArticleVendu selectById(Integer noArticle) throws DALException;
 	
 	public List<ArticleVendu> selectAll() throws DALException;
-	
 }
