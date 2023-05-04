@@ -20,4 +20,5 @@ public class EnchereBLL {
 	public Enchere selectById(int id) {
 		return dao.selectById(id);
 	}
+	}
 }

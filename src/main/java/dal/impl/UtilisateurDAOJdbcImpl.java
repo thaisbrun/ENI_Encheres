@@ -21,10 +21,10 @@ import dal.UtilisateurDAO;
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SELECT_ALL = "SELECT * FROM utilisateurs;";
 	//private static final String SELECT_BY_ID = "SELECT * FROM repas r LEFT JOIN aliments a ON r.id = a.id_repas WHERE r.id = ?;";
-	//private static final String INSERT = "INSERT INTO repas(date_repas, heure_repas) VALUES (?,?);";
+	private static final String INSERT = "INSERT INTO utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,100,0);";
 	//private static final String INSERT_ALIMENT = "INSERT INTO aliments(nom, id_repas) VALUES (?,?);";
 
-	@Override
+	//@Override
 	public List<Utilisateur> selectAll() {
 		List<Utilisateur> resultat = new ArrayList<>();
 		// 1e etape : ouvrir la connexion a la bdd
@@ -48,17 +48,46 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return resultat;
 	}
-	@Override
+	/*@Override
 	public Utilisateur selectById(int id) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 	@Override
 	public void insert(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		
+		List<Utilisateur> resultat = new ArrayList<>();
+		// 1e etape : ouvrir la connexion a la bdd
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			// 2e etape : preparer la requete SQL qu'on souhaite executer
+			PreparedStatement ps = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+			// 4e etape : execution de la requete et interpretation des resultats
+
+			ps.setString(1, utilisateur.getPseudo());
+			ps.setString(2, utilisateur.getNom());
+			ps.setString(3, utilisateur.getPrenom());
+			ps.setString(4, utilisateur.getEmail());
+			ps.setInt(5, utilisateur.getTelephone());
+			ps.setString(6, utilisateur.getRue());
+			ps.setInt(7, utilisateur.getCodePostal());
+			ps.setString(8, utilisateur.getVille());
+			ps.setString(9, utilisateur.getMotDePasse());
+			
+			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			if(rs.next())
+			{
+				utilisateur.setNoUtilisateur(rs.getInt(1));
+			}
+			rs.close();
+			ps.close();
+			cnx.commit();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
+
 /*
 	@Override
 	public Repas selectById(int id) {

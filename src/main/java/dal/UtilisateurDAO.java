@@ -6,13 +6,13 @@ import bo.Utilisateur;
 
 public interface UtilisateurDAO {
 	
-	public void insert(Utilisateur utilisateur) throws DALException;
+	public void insert(Utilisateur utilisateur);
 	
-	public void update(Utilisateur utilisateur) throws DALException;
+	/*public void update(Utilisateur utilisateur) throws DALException;
 	
 	public void delete(int noUtilisateur) throws DALException;
 	
 	public Utilisateur selectById(Integer noUtilisateur) throws DALException;
 	
-	public List<Utilisateur> selectAll() throws DALException;
+	public List<Utilisateur> selectAll() throws DALException;*/
 }
