@@ -1,7 +1,6 @@
 package bo;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ArticleVendu {
 	
@@ -19,7 +18,7 @@ public class ArticleVendu {
 	
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, double miseAPrix, double prixVente, String etatVente, Retrait lieuRetrait,
-			Utilisateur utilisateur) {
+			String image, Utilisateur utilisateur) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -30,9 +29,10 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 		this.lieuRetrait = lieuRetrait;
+		this.image = image;
 		this.utilisateur = utilisateur;
 	}
-	
+
 	public ArticleVendu() {}
 
 	public int getNoArticle() {

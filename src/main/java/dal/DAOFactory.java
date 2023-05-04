@@ -1,6 +1,8 @@
 package dal;
 
+import dal.impl.ArticleVenduDAOJdbcImpl;
 import dal.impl.CategorieDAOJdbcImpl;
+import dal.impl.EnchereDAOJdbcImpl;
 import dal.impl.UtilisateurDAOJdbcImpl;
 
 /*
@@ -10,6 +12,7 @@ public abstract class DAOFactory {
 	
 	private static CategorieDAO categorieDAO;
 	private static UtilisateurDAO utilisateurDAO;
+	private static ArticleVenduDAO articleVenduDAO;
 	private static EnchereDAO enchereDAO;
 	
 	public static CategorieDAO getCategorieDAO() {
@@ -24,6 +27,13 @@ public abstract class DAOFactory {
 			utilisateurDAO = new UtilisateurDAOJdbcImpl();
 		}
 		return utilisateurDAO;
+	}
+	
+	public static ArticleVenduDAO getArticleVenduDAO() {
+		if (articleVenduDAO == null) {
+			articleVenduDAO = new ArticleVenduDAOJdbcImpl();
+		}
+		return articleVenduDAO;
 	}
 	
 	public static EnchereDAO getEnchereDAO() {

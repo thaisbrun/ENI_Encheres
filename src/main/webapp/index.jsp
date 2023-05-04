@@ -51,6 +51,7 @@
 	<div class="zoneEnchere">
 		<div class="row">
 			<!--Galerie items -->
+			<c:forEach var="current" items="${encheres }">
 			<div class="col-xl-3 col-lg-4 col-md-6 mb-4">
         		<div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-1.jpg" alt="" class="img-fluid card-img-top">
           			<div class="p-4">
@@ -63,6 +64,7 @@
           			</div>
         		</div>
       		</div>
+      		</c:forEach>
 			<!-- End -->
 		</div>
 	</div>

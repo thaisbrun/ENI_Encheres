@@ -2,6 +2,7 @@ package bll;
 
 import java.util.List;
 
+import bo.ArticleVendu;
 import bo.Enchere;
 import dal.DAOFactory;
 import dal.EnchereDAO;
@@ -20,5 +21,12 @@ public class EnchereBLL {
 	public Enchere selectById(int id) {
 		return dao.selectById(id);
 	}
+	
+	public ArticleVendu getArticleFromEnchere(Enchere enchere){
+		return enchere.getArticleVendu();
 	}
+	
+	//public boolean enchereEstTerminer(Enchere enchere) {
+	//	
+	//}
 }
