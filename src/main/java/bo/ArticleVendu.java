@@ -14,6 +14,7 @@ public class ArticleVendu {
 	private double prixVente;
 	private String etatVente;
 	private Retrait lieuRetrait;
+	private String image;
 	private Utilisateur utilisateur;
 	
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
@@ -108,6 +109,14 @@ public class ArticleVendu {
 
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {
