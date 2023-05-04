@@ -1,5 +1,7 @@
 package bll;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import bo.ArticleVendu;
@@ -18,15 +20,12 @@ public class EnchereBLL {
 		return dao.selectAll();
 	}
 	
-	public Enchere selectById(int id) {
-		return dao.selectById(id);
-	}
-	
 	public ArticleVendu getArticleFromEnchere(Enchere enchere){
 		return enchere.getArticleVendu();
 	}
 	
-	//public boolean enchereEstTerminer(Enchere enchere) {
-	//	
-	//}
+	public String getDateEnchereFormatedString(LocalDate date) {
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("DD/MM/YY");
+		return date.format(dateTimeFormatter);
+	}
 }

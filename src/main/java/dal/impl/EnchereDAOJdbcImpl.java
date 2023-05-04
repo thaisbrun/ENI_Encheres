@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bll.ArticleVenduBLL;
-import bll.EnchereBLL;
 import bll.UtilisateurBLL;
 import bo.ArticleVendu;
 import bo.Enchere;
+import bo.Utilisateur;
 import dal.ConnectionProvider;
 import dal.EnchereDAO;
 
@@ -21,52 +21,31 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	
 	private ArticleVenduBLL articleVenduBLL;
 	private UtilisateurBLL utilisateurBLL;
-			
-	@Override
-	public void insert(Enchere articleVendu) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(Enchere articleVendu) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(int noArticle) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Enchere selectById(Integer noArticle) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Enchere> selectAll() {
-		List<Enchere> resultat = new ArrayList<>();
+		List<Enchere> resultats = new ArrayList<>();
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement ps = cnx.prepareStatement(SELECT_ALL);
 		
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
+				Utilisateur utilisateur = utilisateurBLL.selectById(rs.getInt("no_utilisateur"));
 				ArticleVendu article = articleVenduBLL.selectById(rs.getInt("no_article"));
-				Utilisateur utilisateur = 
 				
-				Enchere enchere = new Enchere(); //Utilisateur / ArticleVendu / date / montant
-				//enchere.setId(rs.getInt("id"));
-				//enchere.setNom(rs.getString("nom"));
-				resultat.add(enchere);
+				Enchere enchere = new Enchere();
+				enchere.setUtilisateur(utilisateur);
+				enchere.setArticleVendu(article);
+				enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+				enchere.setMontant_enchère(rs.getInt("montant_enchere"));
+				
+				resultats.add(enchere);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return resultat;
+		return resultats;
 	}
 
 }

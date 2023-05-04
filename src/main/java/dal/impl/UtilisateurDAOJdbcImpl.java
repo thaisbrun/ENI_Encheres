@@ -1,15 +1,9 @@
 package dal.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import bo.Utilisateur;
 import dal.ConnectionProvider;
@@ -20,7 +14,7 @@ import dal.UtilisateurDAO;
  */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	//private static final String SELECT_ALL = "SELECT pseudo, mot_de_passe FROM utilisateurs;";
-	//private static final String SELECT_BY_ID = "SELECT * FROM repas r LEFT JOIN aliments a ON r.id = a.id_repas WHERE r.id = ?;";
+	private static final String SELECT_BY_ID = "SELECT * FROM repas r LEFT JOIN aliments a ON r.id = a.id_repas WHERE r.id = ?;";
 	private static final String INSERT = "INSERT INTO utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,100,0);";
 	//private static final String INSERT_ALIMENT = "INSERT INTO aliments(nom, id_repas) VALUES (?,?);";
 	private static final String SELECT_BY_LOGIN = "SELECT * FROM utilisateurs WHERE pseudo = ? AND mot_de_passe = ?;";
@@ -58,7 +52,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}*/
 	@Override
 	public void insert(Utilisateur utilisateur) {
-		List<Utilisateur> resultat = new ArrayList<>();
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			// 2e etape : preparer la requete SQL qu'on souhaite executer
@@ -69,9 +62,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			ps.setString(2, utilisateur.getNom());
 			ps.setString(3, utilisateur.getPrenom());
 			ps.setString(4, utilisateur.getEmail());
-			ps.setInt(5, utilisateur.getTelephone());
+			ps.setString(5, utilisateur.getTelephone());
 			ps.setString(6, utilisateur.getRue());
-			ps.setInt(7, utilisateur.getCodePostal());
+			ps.setString(7, utilisateur.getCodePostal());
 			ps.setString(8, utilisateur.getVille());
 			ps.setString(9, utilisateur.getMotDePasse());
 			
@@ -92,7 +85,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 
 
- public Utilisateur connexionByLogin(String pseudo, String motDePasse) {
+	public Utilisateur connexionByLogin(String pseudo, String motDePasse) {
 		Utilisateur utilisateur = null;
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -111,8 +104,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				utilisateur.setPrenom(rs.getString("prenom"));
 				utilisateur.setEmail("email");
 				utilisateur.setRue(rs.getString("rue"));
-				utilisateur.setCodePostal(rs.getInt("codePostal"));
-				utilisateur.setTelephone(rs.getInt("telephone"));
+				utilisateur.setCodePostal(rs.getString("codePostal"));
+				utilisateur.setTelephone(rs.getString("telephone"));
 				utilisateur.setVille(rs.getString("ville"));
 				utilisateur.setCredit(rs.getInt("credit"));
 				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
@@ -125,11 +118,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return utilisateur;
 	}
- }
- /*
+	
 	@Override
-	public Repas selectById(int id) {
-		Repas resultat = null;
+	public Utilisateur selectById(int id) {
+		Utilisateur resultat = null;
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			// 2e etape : preparer la requete SQL qu'on souhaite executer
@@ -141,10 +133,19 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			// 4e etape : execution de la requete et interpretation des resultats
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				resultat = new Repas();
-				resultat.setId(rs.getInt("id"));
-				resultat.setDate(rs.getDate("date_repas").toLocalDate());
-				resultat.setHeure(rs.getTime("heure_repas").toLocalTime());
+				resultat = new Utilisateur();
+				resultat.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				resultat.setPseudo(rs.getString("pseudo"));
+				resultat.setNom(rs.getString("nom"));
+				resultat.setPrenom(rs.getString("prenom"));
+				resultat.setEmail(rs.getString("email"));
+				resultat.setTelephone(rs.getString("telephone"));
+				resultat.setRue(rs.getString("rue"));
+				resultat.setCodePostal(rs.getString("code_postal"));
+				resultat.setVille(rs.getString("ville"));
+				resultat.setMotDePasse(rs.getString("mot_de_passe"));
+				resultat.setCredit(rs.getInt("credit"));
+				resultat.setAdministrateur(rs.getBoolean("administrateur"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -152,7 +153,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		return resultat;
 	}
 
-	@Override
+	/*@Override
 	public void insert(Repas repas) {
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -182,5 +183,5 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-}*/
+	}*/
+}

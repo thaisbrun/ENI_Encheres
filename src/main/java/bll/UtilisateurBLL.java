@@ -1,7 +1,5 @@
 package bll;
 
-import java.util.List;
-
 import bo.Utilisateur;
 import dal.DAOFactory;
 import dal.UtilisateurDAO;
@@ -20,10 +18,10 @@ public class UtilisateurBLL {
 	public Utilisateur connexionByLogin(String pseudo, String motDePasse) {		
 		return dao.connexionByLogin(pseudo, motDePasse);
 	}
-	
-	/*public Utilisateur selectById(int id) {
+
+	public Utilisateur selectById(int id) {
 		return dao.selectById(id);
-	}*/
+	}
 	
 	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,int telephone,String rue,int codePostal, String ville,String motDePasse)
 		{
