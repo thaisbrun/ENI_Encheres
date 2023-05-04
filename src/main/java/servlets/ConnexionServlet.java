@@ -2,7 +2,10 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +21,7 @@ import bo.Utilisateur;
 @WebServlet("/connexion")
 public class ConnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UtilisateurBLL utilbll;
+	private UtilisateurBLL bll;
 
     /**
      * Default constructor. 
@@ -28,7 +31,7 @@ public class ConnexionServlet extends HttpServlet {
     }
 
 	public void init() throws ServletException {
-		utilbll = new UtilisateurBLL();
+		bll = new UtilisateurBLL();
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,31 +48,28 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 // read form fields
 		
-        String email = request.getParameter("email");
+        String pseudo = request.getParameter("pseudo");
         String motDePasse = request.getParameter("motDePasse");
-        
-        if (email == "recupleGet" && motDePasse == "recupleGet" ) {
-        System.out.println("email: " + email);
-        System.out.println("mot de passe: " + motDePasse);}
-        else {
-            System.out.println("Non");
-        }
- 
-        // do some processing here...
-         
-        // get response writer
-        PrintWriter writer = response.getWriter();
-         
-        // build HTML code
-        String htmlRespone = "<html>";
-        htmlRespone += "<h2>Your username is: " + email + "<br/>";      
-        htmlRespone += "Your password is: " + motDePasse + "</h2>";    
-        htmlRespone += "</html>";
-         
-        // return response
-        writer.println(htmlRespone);
-	}
 
+        	
+        	UtilisateurBLL utilisateurBll = new UtilisateurBLL();
+    		Utilisateur u = utilisateurBll.connexionByLogin(pseudo,motDePasse);
+    		
+    		if(u != null)
+    		{
+    		//SI pas nul : on charge en session et on redirige vers l'accueil
+    		request.getSession().setAttribute("user",u);
+    		System.out.println(u.toString());
+			
+			RequestDispatcher rd = request.getRequestDispatcher("./");
+			rd.forward(request, response);        
+			}  
+    		else{
+    			//Si null = on renvoie sur lajsp de connexion avec message d'erreur
+    			System.out.println("NON");
+    		}
+    		
+	}
 }
+

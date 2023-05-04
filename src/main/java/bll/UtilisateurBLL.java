@@ -1,28 +1,27 @@
 package bll;
 
+import java.util.List;
+
+import bo.Utilisateur;
 import dal.DAOFactory;
 import dal.UtilisateurDAO;
 
 public class UtilisateurBLL {
-	private static UtilisateurBLL instance;
-	private UtilisateurDAO utilisateurDAO;
+	private UtilisateurDAO dao;
 	
 	public UtilisateurBLL() {
-		enchereDAO = DAOFactory.getArticleDAO();
+		dao = DAOFactory.getUtilisateurDAO(); 
 	}
-	
-<<<<<<< Upstream, based on branch 'master' of https://github.com/thaisbrun/ENI_Encheres.git
-	public static UtilisateurBLL getInstance() {
-		if (UtilisateurBLL.instance == null) {
-			UtilisateurBLL.instance = new UtilisateurBLL();
-		return instance;
-		}
-=======
+
 	/*public List<Utilisateur> selectAll() {
 		return dao.selectAll();
+	}*/
+	
+	public Utilisateur connexionByLogin(String pseudo, String motDePasse) {		
+		return dao.connexionByLogin(pseudo, motDePasse);
 	}
 	
-	public Utilisateur selectById(int id) {
+	/*public Utilisateur selectById(int id) {
 		return dao.selectById(id);
 	}*/
 	
@@ -45,7 +44,5 @@ public class UtilisateurBLL {
 				
 			return utilisateur;
 		}
-
->>>>>>> 18b75b6 Inscription OK
 	}
 

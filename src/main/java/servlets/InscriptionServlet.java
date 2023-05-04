@@ -19,7 +19,7 @@ import bo.Utilisateur;
 @WebServlet("/inscription")
 public class InscriptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UtilisateurBLL utilbll;
+	private UtilisateurBLL bll;
 
     /**
      * Default constructor. 
@@ -29,7 +29,7 @@ public class InscriptionServlet extends HttpServlet {
     }
 
 	public void init() throws ServletException {
-		utilbll = new UtilisateurBLL();
+		bll = new UtilisateurBLL();
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
