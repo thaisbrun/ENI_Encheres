@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bll.UtilisateurBLL;
-import bo.Categorie;
 import bo.Utilisateur;
 
 /**
@@ -38,7 +38,6 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
 
@@ -49,24 +48,28 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Utilisateur> listeUtilisateur = bll.selectAll();
 		
         String pseudo = request.getParameter("pseudo");
-        String mdp = request.getParameter("motDePasse");
+        String motDePasse = request.getParameter("motDePasse");
 
-        for (Utilisateur utilisateur : listeUtilisateur) { 	 
-
-        	if (pseudo == utilisateur.getEmail()  && mdp == utilisateur.getMotDePasse() ) {
-        		
-        System.out.println("email: " + pseudo);
-        System.out.println("mot de passe: " + mdp);
-        }     	
-        else {
-            System.out.println("Non");
-        }
-			//Si tout se passe bien, je vais vers la page de consultation:
+        	
+        	UtilisateurBLL utilisateurBll = new UtilisateurBLL();
+    		Utilisateur u = utilisateurBll.connexionByLogin(pseudo,motDePasse);
+    		
+    		if(u != null)
+    		{
+    		//SI pas nul : on charge en session et on redirige vers l'accueil
+    		request.getSession().setAttribute("user",u);
+    		System.out.println(u.toString());
+			
 			RequestDispatcher rd = request.getRequestDispatcher("./");
-			rd.forward(request, response);        }  
+			rd.forward(request, response);        
+			}  
+    		else{
+    			//Si null = on renvoie sur lajsp de connexion avec message d'erreur
+    			System.out.println("NON");
+    		}
+    		
 	}
-
 }
+

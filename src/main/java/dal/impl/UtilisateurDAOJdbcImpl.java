@@ -19,34 +19,39 @@ import dal.UtilisateurDAO;
  * Implémentation des méthodes proposées par RepasDAO
  */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
-	private static final String SELECT_ALL = "SELECT * FROM utilisateurs;";
+	//private static final String SELECT_ALL = "SELECT pseudo, mot_de_passe FROM utilisateurs;";
 	//private static final String SELECT_BY_ID = "SELECT * FROM repas r LEFT JOIN aliments a ON r.id = a.id_repas WHERE r.id = ?;";
 	private static final String INSERT = "INSERT INTO utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,100,0);";
 	//private static final String INSERT_ALIMENT = "INSERT INTO aliments(nom, id_repas) VALUES (?,?);";
+	private static final String SELECT_BY_LOGIN = "SELECT * FROM utilisateurs WHERE pseudo = ? AND mot_de_passe = ?;";
 
 	//@Override
-	public List<Utilisateur> selectAll() {
-		List<Utilisateur> resultat = new ArrayList<>();
+	/*public List<Utilisateur> selectAll() {
+		List<Utilisateur> listeUtilisateurs = new ArrayList<>();
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			// 2e etape : preparer la requete SQL qu'on souhaite executer
 			PreparedStatement ps = cnx.prepareStatement(SELECT_ALL);
 			Utilisateur utilisateur = new Utilisateur();
-
-				int numero = utilisateur.getNoUtilisateur();
+			
 				String prenom = utilisateur.getPrenom();
-				String nom = utilisateur.getNom();
-				String email = utilisateur.getEmail();
-				int telephone = utilisateur.getTelephone();
-			resultat.add(utilisateur);
+				String pseudo = utilisateur.getPseudo();
+				String motDePasse = utilisateur.getMotDePasse();
+				
+				listeUtilisateurs.add(utilisateur);
+				
 // 4e etape : execution de la requete et interpretation des resultats
+				
 			ResultSet rs = ps.executeQuery();
+			rs.close();
+			ps.close();
+			cnx.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return resultat;
+		return listeUtilisateurs;
 	}
-	/*@Override
+	@Override
 	public Utilisateur selectById(int id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -84,9 +89,44 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			e.printStackTrace();
 		}
 	}
-}
 
-/*
+
+
+ public Utilisateur connexionByLogin(String pseudo, String motDePasse) {
+		Utilisateur utilisateur = null;
+		// 1e etape : ouvrir la connexion a la bdd
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			// 2e etape : preparer la requete SQL qu'on souhaite executer
+			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_LOGIN);
+			
+			// 3e etape : attribuer les parametres nécessaires à ma requête
+			ps.setString(1, pseudo);
+			ps.setString(2, motDePasse);
+			// 4e etape : execution de la requete et interpretation des resultats
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				utilisateur = new Utilisateur();	
+				utilisateur.setPseudo(pseudo);
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail("email");
+				utilisateur.setRue(rs.getString("rue"));
+				utilisateur.setCodePostal(rs.getInt("codePostal"));
+				utilisateur.setTelephone(rs.getInt("telephone"));
+				utilisateur.setVille(rs.getString("ville"));
+				utilisateur.setCredit(rs.getInt("credit"));
+				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+			}
+			rs.close();
+			ps.close();
+			cnx.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return utilisateur;
+	}
+ }
+ /*
 	@Override
 	public Repas selectById(int id) {
 		Repas resultat = null;

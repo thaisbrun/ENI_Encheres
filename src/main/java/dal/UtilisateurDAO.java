@@ -14,5 +14,7 @@ public interface UtilisateurDAO {
 	
 	public Utilisateur selectById(Integer noUtilisateur) throws DALException;*/
 	
-	public List<Utilisateur> selectAll();
+	public Utilisateur connexionByLogin(String pseudo, String motDePasse);
+	
+	//public List<Utilisateur> selectAll();
 }
