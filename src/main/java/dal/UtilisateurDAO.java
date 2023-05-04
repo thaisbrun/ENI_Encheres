@@ -12,7 +12,7 @@ public interface UtilisateurDAO {
 	
 	public void delete(int noUtilisateur) throws DALException;
 	
-	public Utilisateur selectById(Integer noUtilisateur) throws DALException;
+	public Utilisateur selectById(Integer noUtilisateur) throws DALException;*/
 	
-	public List<Utilisateur> selectAll() throws DALException;*/ 
+	public List<Utilisateur> selectAll();
 }

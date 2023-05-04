@@ -31,9 +31,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			// 2e etape : preparer la requete SQL qu'on souhaite executer
 			PreparedStatement ps = cnx.prepareStatement(SELECT_ALL);
-			// 4e etape : execution de la requete et interpretation des resultats
-			ResultSet rs = ps.executeQuery();
-			
 			Utilisateur utilisateur = new Utilisateur();
 
 				int numero = utilisateur.getNoUtilisateur();
@@ -42,7 +39,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				String email = utilisateur.getEmail();
 				int telephone = utilisateur.getTelephone();
 			resultat.add(utilisateur);
-			
+// 4e etape : execution de la requete et interpretation des resultats
+			ResultSet rs = ps.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
