@@ -1,16 +1,17 @@
 package bll;
 
+import bo.ArticleVendu;
 import dal.ArticleVenduDAO;
 import dal.DAOFactory;
 
 public class ArticleVenduBLL {
-	private ArticleVenduDAO articleVenduDAO;
+	private ArticleVenduDAO dao;
 	
 	public ArticleVenduBLL() {
-		articleVenduDAO = DAOFactory.getArticleVenduDAO();
+		dao = DAOFactory.getArticleVenduDAO();
 	}
 	
-	
-	
-	
+	public ArticleVendu selectById(int id) {
+		return dao.selectById(id);
+	}
 }

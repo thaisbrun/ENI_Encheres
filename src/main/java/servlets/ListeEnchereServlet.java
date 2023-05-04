@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-
-import bll.ArticleVenduBLL;
 import bll.EnchereBLL;
 import bo.ArticleVendu;
 import bo.Enchere;
@@ -43,7 +40,7 @@ public class ListeEnchereServlet extends HttpServlet {
 		for(Enchere enchere : encheres) {
 			articles.add(enchere.getArticleVendu());
 		}
-		
+		System.out.println("Servlet listeEncher");
 		request.setAttribute("encheres", encheres);
 		request.setAttribute("articles", articles);
 		//request.setAttribute("articlesVendu", articleVenduBLL.selectAll());
