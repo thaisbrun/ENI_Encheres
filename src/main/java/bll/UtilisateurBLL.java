@@ -23,7 +23,7 @@ public class UtilisateurBLL {
 		return dao.selectById(id);
 	}
 	
-	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,int telephone,String rue,int codePostal, String ville,String motDePasse)
+	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse)
 		{
 			
 			Utilisateur utilisateur = null;

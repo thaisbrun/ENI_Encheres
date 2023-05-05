@@ -1,40 +1,39 @@
 package dal.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import bo.ArticleVendu;
+import bo.Enchere;
+import bo.Utilisateur;
 import dal.ArticleVenduDAO;
+import dal.ConnectionProvider;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
+	private static final String SELECT_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?;";
 
 	@Override
-	public void insert(ArticleVendu articleVendu) {
-		// TODO Auto-generated method stub
-		
-	}
+	public ArticleVendu selectById(int noArticle) {
 
-	@Override
-	public void update(ArticleVendu articleVendu) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(int noArticle) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ArticleVendu selectById(Integer noArticle) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ArticleVendu> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		ArticleVendu resultat = null;
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_ID);
+			
+			ps.setInt(1, noArticle);
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				resultat = new ArticleVendu();
+				//resultat.setNoUtilisateur(rs.getInt("no_utilisateur"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultat;
 	}
 
 }
