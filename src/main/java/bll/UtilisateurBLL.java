@@ -27,7 +27,12 @@ public class UtilisateurBLL {
 		return dao.selectById(id);
 	}
 	
+<<<<<<< HEAD
 	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse){
+=======
+	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse)
+		{
+>>>>>>> branch 'master' of https://github.com/thaisbrun/ENI_Encheres.git
 			
 			Utilisateur utilisateur = null;
 			

@@ -56,18 +56,19 @@ public class ConnexionServlet extends HttpServlet {
         	UtilisateurBLL utilisateurBll = new UtilisateurBLL();
     		Utilisateur u = utilisateurBll.connexionByLogin(pseudo,motDePasse);
     		
-    		if(u != null)
+    		if(u ==(null))
     		{
-    		//SI pas nul : on charge en session et on redirige vers l'accueil
+    			RequestDispatcher rd = request.getRequestDispatcher("/erreur");
+    			rd.forward(request, response);   
+    			
+    		}  
+    		else{
+    			//SI pas nul : on charge en session et on redirige vers l'accueil
     		request.getSession().setAttribute("user",u);
     		System.out.println(u.toString());
 			
 			RequestDispatcher rd = request.getRequestDispatcher("./");
-			rd.forward(request, response);        
-			}  
-    		else{
-    			//Si null = on renvoie sur lajsp de connexion avec message d'erreur
-    			System.out.println("NON");
+			rd.forward(request, response);     
     		}
     		
 	}

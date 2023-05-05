@@ -83,8 +83,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 	}
 
-
-
 	public Utilisateur connexionByLogin(String pseudo, String motDePasse) {
 		Utilisateur utilisateur = null;
 		// 1e etape : ouvrir la connexion a la bdd
@@ -103,7 +101,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				utilisateur.setNom(rs.getString("nom"));
 				utilisateur.setPrenom(rs.getString("prenom"));
 				utilisateur.setEmail("email");
-				utilisateur.setRue(rs.getString("rue"));
+				utilisateur.setRue(rs.getString("rue"));				
 				utilisateur.setCodePostal(rs.getString("codePostal"));
 				utilisateur.setTelephone(rs.getString("telephone"));
 				utilisateur.setVille(rs.getString("ville"));
