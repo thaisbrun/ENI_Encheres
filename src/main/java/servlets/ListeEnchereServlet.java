@@ -26,9 +26,8 @@ public class ListeEnchereServlet extends HttpServlet {
 	}
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Enchere> encheres = enchereBLL.selectAll();
-		
-		request.setAttribute("encheres", encheres);
+		//List<Enchere> encheres = enchereBLL.selectAll();
+		request.setAttribute("encheres", enchereBLL.selectAll());
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

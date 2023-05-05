@@ -31,6 +31,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
+				System.out.println(rs.getInt("no_utilisateur"));
 				Utilisateur utilisateur = utilisateurBLL.selectById(rs.getInt("no_utilisateur"));
 				ArticleVendu article = articleVenduBLL.selectById(rs.getInt("no_article"));
 				

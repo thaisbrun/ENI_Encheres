@@ -14,7 +14,7 @@ import dal.UtilisateurDAO;
  */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	//private static final String SELECT_ALL = "SELECT pseudo, mot_de_passe FROM utilisateurs;";
-	private static final String SELECT_BY_ID = "SELECT * FROM repas r LEFT JOIN aliments a ON r.id = a.id_repas WHERE r.id = ?;";
+	private static final String SELECT_BY_ID = "SELECT * FROM utilisateurs WHERE no_utilisateur = ?;";
 	private static final String INSERT = "INSERT INTO utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,100,0);";
 	//private static final String INSERT_ALIMENT = "INSERT INTO aliments(nom, id_repas) VALUES (?,?);";
 	private static final String SELECT_BY_LOGIN = "SELECT * FROM utilisateurs WHERE pseudo = ? AND mot_de_passe = ?;";
@@ -121,18 +121,17 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	@Override
 	public Utilisateur selectById(int id) {
+		System.out.println("UtilistaeurBLL - Test : n°1");
 		Utilisateur resultat = null;
-		// 1e etape : ouvrir la connexion a la bdd
+		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
 			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_ID);
-			
-			// 3e etape : attribuer les parametres nécessaires à ma requête
+			System.out.println("UtilistaeurBLL - Test : n°2");
 			ps.setInt(1, id);
 			
-			// 4e etape : execution de la requete et interpretation des resultats
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
+				System.out.println("UtilistaeurBLL - Test : n°3");
 				resultat = new Utilisateur();
 				resultat.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				resultat.setPseudo(rs.getString("pseudo"));
@@ -147,9 +146,15 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				resultat.setCredit(rs.getInt("credit"));
 				resultat.setAdministrateur(rs.getBoolean("administrateur"));
 			}
+			System.out.println("UtilistaeurBLL - Test : n°4");
+			rs.close();
+			ps.close();
+			cnx.commit();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println("UtilistaeurBLL - Test : n°5");
 		return resultat;
 	}
 
