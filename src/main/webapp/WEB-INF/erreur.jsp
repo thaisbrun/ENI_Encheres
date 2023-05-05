@@ -32,17 +32,9 @@
   </div>
 </nav>
 <div class="container text-center">
-<form name="connexionForm" method="post" action="connexion">
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Pseudo</label>
-    <input type="text" class="form-control"  name="pseudo" id="exampleInputEmail1" aria-describedby="emailHelp">
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-    <input type="password" class="form-control" name="motDePasse" id="exampleInputPassword1">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<p>
+<h2 style="color:red;"> Les informations de connexion sont erronées, merci de réessayer. </h2>
+</p>
 </div>
 </body>
 </html>
