@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Categorie;
+import bo.Enchere;
 import dal.CategorieDAO;
 import dal.ConnectionProvider;
 
@@ -25,7 +26,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
 	@Override
 	public List<Categorie> selectAll() {
-		List<Categorie> resultat = new ArrayList<>();
+		List<Categorie> listeCategories = new ArrayList<>();
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			// 2e etape : preparer la requete SQL qu'on souhaite executer
@@ -34,16 +35,15 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			Categorie categorie = new Categorie();
-
-				int numero = categorie.getNumero();
-				String libelle = categorie.getLibelle();
-		
-			resultat.add(categorie);
+				while(rs.next()) {
+					categorie = categorieBuilder(rs);
+					listeCategories.add(categorie);
+				}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return resultat;
+		return listeCategories;
 	}
 	@Override
 	public Categorie selectById(int id) {
@@ -55,7 +55,16 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private Categorie categorieBuilder(ResultSet rs) throws SQLException {
+		Categorie categorie;
+		categorie=new Categorie();
+		categorie.setNumero(rs.getInt("no_categorie"));
+		categorie.setLibelle(rs.getString("libelle"));
+		return categorie;
+	}
 }
+
 /*
 	@Override
 	public Repas selectById(int id) {

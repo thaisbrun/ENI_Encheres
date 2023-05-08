@@ -16,37 +16,41 @@ import dal.ConnectionProvider;
 import dal.EnchereDAO;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO{
-	private static final String SELECT_ALL = "SELECT * FROM ENCHERES";
-	//private static final String SELECT_BY_ID = "SELECT µ FROM ENCHERES WHERE no_article = ?;";
+	private static final String SELECT_ALL = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON encheres.no_utilisateur=u.no_utilisateur; ";
+	//private static final String SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ?;";
 	
 	private ArticleVenduBLL articleVenduBLL;
 	private UtilisateurBLL utilisateurBLL;
 
 	@Override
 	public List<Enchere> selectAll() {
-		List<Enchere> resultats = new ArrayList<>();
-		try (Connection cnx = ConnectionProvider.getConnection();) {
-			PreparedStatement ps = cnx.prepareStatement(SELECT_ALL);
-		
-			ResultSet rs = ps.executeQuery();
-			
-			while (rs.next()) {
-				System.out.println(rs.getInt("no_utilisateur"));
-				Utilisateur utilisateur = utilisateurBLL.selectById(rs.getInt("no_utilisateur"));
-				ArticleVendu article = articleVenduBLL.selectById(rs.getInt("no_article"));
+		List<Enchere> listeEncheres = new ArrayList<Enchere>();
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
+			ResultSet rs = pstmt.executeQuery();
+			Enchere enchere=new Enchere();
+			while(rs.next())
+			{
+				enchere = enchereBuilder(rs);
+				listeEncheres.add(enchere);
 				
-				Enchere enchere = new Enchere();
-				enchere.setUtilisateur(utilisateur);
-				enchere.setArticleVendu(article);
-				enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
-				enchere.setMontant_enchère(rs.getInt("montant_enchere"));
-				
-				resultats.add(enchere);
 			}
-		} catch (SQLException e) {
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
-		return resultats;
-	}
+		return listeEncheres;
 
+}
+	private Enchere enchereBuilder(ResultSet rs) throws SQLException {
+		Enchere enchere;
+		enchere=new Enchere();
+		enchere.setNo_utilisateur(rs.getInt("no_utilisateur"));
+		enchere.setNo_Article(rs.getInt("no_article"));
+		enchere.setDateEnchere(rs.getDate("date_enchere"));	
+		enchere.setMontant_enchere(rs.getDouble("montant_enchere"));
+		return enchere;
+	}
 }

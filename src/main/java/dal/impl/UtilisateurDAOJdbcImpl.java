@@ -119,32 +119,31 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	@Override
 	public Utilisateur selectById(int id) {
-		System.out.println("UtilistaeurBLL - Test : n°1");
-		Utilisateur resultat = null;
-		
+		Utilisateur utilisateur = null;
+		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_ID);
-			System.out.println("UtilistaeurBLL - Test : n°2");
-			ps.setInt(1, id);
 			
+			// 2e etape : preparer la requete SQL qu'on souhaite executer
+			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_ID);
+			
+			// 3e etape : attribuer les parametres nécessaires à ma requête
+			ps.setInt(1, id);
+			// 4e etape : execution de la requete et interpretation des resultats
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				System.out.println("UtilistaeurBLL - Test : n°3");
-				resultat = new Utilisateur();
-				resultat.setNoUtilisateur(id);
-				resultat.setPseudo(rs.getString("pseudo"));
-				resultat.setNom(rs.getString("nom"));
-				resultat.setPrenom(rs.getString("prenom"));
-				resultat.setEmail(rs.getString("email"));
-				resultat.setTelephone(rs.getString("telephone"));
-				resultat.setRue(rs.getString("rue"));
-				resultat.setCodePostal(rs.getString("code_postal"));
-				resultat.setVille(rs.getString("ville"));
-				resultat.setMotDePasse(rs.getString("mot_de_passe"));
-				resultat.setCredit(rs.getInt("credit"));
-				resultat.setAdministrateur(rs.getBoolean("administrateur"));
+				utilisateur = new Utilisateur();
+				utilisateur.setNoUtilisateur(id);
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setTelephone(rs.getString("telephone"));
+				utilisateur.setRue(rs.getString("rue"));
+				utilisateur.setCodePostal(rs.getString("codePostal"));
+				utilisateur.setVille(rs.getString("ville"));
+				utilisateur.setCredit(rs.getInt("credit"));
+				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
 			}
-			System.out.println("UtilistaeurBLL - Test : n°4");
 			rs.close();
 			ps.close();
 			cnx.commit();
@@ -152,8 +151,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("UtilistaeurBLL - Test : n°5");
-		return resultat;
+		return utilisateur;
 	}
 
 	/*@Override
