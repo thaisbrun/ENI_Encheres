@@ -14,11 +14,11 @@ import dal.UtilisateurDAO;
  */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	//private static final String SELECT_ALL = "SELECT pseudo, mot_de_passe FROM utilisateurs;";
-	private static final String SELECT_BY_ID = "SELECT * FROM utilisateurs WHERE no_utilisateur = ?;";
+	private static final String SELECT_BY_LOGINONLY = "SELECT * FROM utilisateurs WHERE pseudo = ?;";
 	private static final String INSERT = "INSERT INTO utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,100,0);";
-	//private static final String INSERT_ALIMENT = "INSERT INTO aliments(nom, id_repas) VALUES (?,?);";
+	private static final String UPDATE = "UPDATE utilisateurs SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?;";
 	private static final String SELECT_BY_LOGIN = "SELECT * FROM utilisateurs WHERE pseudo = ? AND mot_de_passe = ?;";
-
+	private static final String DELETE = "DELETE FROM utilisateurs WHERE id = ?;";
 	//@Override
 	/*public List<Utilisateur> selectAll() {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<>();
@@ -83,6 +83,49 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 	}
 
+	@Override
+	public void update(Utilisateur utilisateur) {
+		// 1e etape : ouvrir la connexion a la bdd
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			// 2e etape : preparer la requete SQL qu'on souhaite executer
+			PreparedStatement ps = cnx.prepareStatement(UPDATE);
+			// 4e etape : execution de la requete et interpretation des resultats
+
+			ps.setString(1, utilisateur.getPseudo());
+			ps.setString(2, utilisateur.getNom());
+			ps.setString(3, utilisateur.getPrenom());
+			ps.setString(4, utilisateur.getEmail());
+			ps.setString(5, utilisateur.getTelephone());
+			ps.setString(6, utilisateur.getRue());
+			ps.setString(7, utilisateur.getCodePostal());
+			ps.setString(8, utilisateur.getVille());
+			ps.setString(9, utilisateur.getMotDePasse());
+			
+			ps.executeUpdate();
+			cnx.commit();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void delete(Utilisateur utilisateur) {
+		// 1e etape : ouvrir la connexion a la bdd
+				try (Connection cnx = ConnectionProvider.getConnection();) {
+					// 2e etape : preparer la requete SQL qu'on souhaite executer
+					PreparedStatement ps = cnx.prepareStatement(DELETE);
+					// 4e etape : execution de la requete et interpretation des resultats
+
+					ps.setInt(1, utilisateur.getNoUtilisateur());
+					
+					ps.executeUpdate();
+					cnx.commit();
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+	}
 	public Utilisateur connexionByLogin(String pseudo, String motDePasse) {
 		Utilisateur utilisateur = null;
 		// 1e etape : ouvrir la connexion a la bdd
@@ -102,7 +145,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				utilisateur.setPrenom(rs.getString("prenom"));
 				utilisateur.setEmail("email");
 				utilisateur.setRue(rs.getString("rue"));				
-				utilisateur.setCodePostal(rs.getString("codePostal"));
+				utilisateur.setCodePostal(rs.getString("code_postal"));
 				utilisateur.setTelephone(rs.getString("telephone"));
 				utilisateur.setVille(rs.getString("ville"));
 				utilisateur.setCredit(rs.getInt("credit"));
@@ -118,28 +161,28 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 	
 	@Override
-	public Utilisateur selectById(int id) {
+	public Utilisateur selectByLoginOnly(String pseudo) {
 		Utilisateur utilisateur = null;
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			
 			// 2e etape : preparer la requete SQL qu'on souhaite executer
-			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_ID);
+			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_LOGINONLY);
 			
 			// 3e etape : attribuer les parametres nécessaires à ma requête
-			ps.setInt(1, id);
+			ps.setString(1, pseudo);
 			// 4e etape : execution de la requete et interpretation des resultats
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				utilisateur = new Utilisateur();
-				utilisateur.setNoUtilisateur(id);
-				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				utilisateur.setPseudo(pseudo);
 				utilisateur.setNom(rs.getString("nom"));
 				utilisateur.setPrenom(rs.getString("prenom"));
 				utilisateur.setEmail(rs.getString("email"));
 				utilisateur.setTelephone(rs.getString("telephone"));
 				utilisateur.setRue(rs.getString("rue"));
-				utilisateur.setCodePostal(rs.getString("codePostal"));
+				utilisateur.setCodePostal(rs.getString("code_postal"));
 				utilisateur.setVille(rs.getString("ville"));
 				utilisateur.setCredit(rs.getInt("credit"));
 				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));

@@ -23,8 +23,8 @@ public class UtilisateurBLL {
 		return dao.connexionByLogin(pseudo, motDePasse);
 	}
 
-	public Utilisateur selectById(int id) {
-		return dao.selectById(id);
+	public Utilisateur selectByLoginOnly(String pseudo) {
+		return dao.selectByLoginOnly(pseudo);
 	}
 	
 
@@ -48,6 +48,38 @@ public class UtilisateurBLL {
 			return utilisateur;
 	}
 	
+	public Utilisateur ModifierUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse)
+	{
+		
+		Utilisateur utilisateur = null;
+		
+			utilisateur = new Utilisateur();
+			utilisateur.setPseudo(pseudo);
+			utilisateur.setNom(nom);
+			utilisateur.setPrenom(prenom);
+			utilisateur.setRue(rue);
+			utilisateur.setCodePostal(codePostal);
+			utilisateur.setEmail(email);
+			utilisateur.setMotDePasse(motDePasse);
+			utilisateur.setTelephone(telephone);
+			utilisateur.setVille(ville);
+			this.dao.update(utilisateur);
+			
+		return utilisateur;
+}
+
+	public Utilisateur SupprimerUtilisateur(int no_utilisateur)
+	{
+		
+		Utilisateur utilisateur = null;
+		
+			utilisateur = new Utilisateur();
+			utilisateur.setNoUtilisateur(no_utilisateur);
+			this.dao.update(utilisateur);
+			
+		return utilisateur;
+}
+
 	//VERIFICATIONS
 	public void validationGeneral(Utilisateur utilisateur) throws BLLException {
 		
@@ -83,7 +115,7 @@ public class UtilisateurBLL {
 	}
 	
 	public void validationAjouterUtilisateur(Utilisateur utilisateur) throws BLLException{
-		Utilisateur result = selectById(utilisateur.getNoUtilisateur());
+		Utilisateur result = selectByLoginOnly(utilisateur.getPseudo());
 		if(utilisateur.getPseudo() == result.getPseudo()) {
 			throw new BLLException("le pseudo est déja pris");
 		}
