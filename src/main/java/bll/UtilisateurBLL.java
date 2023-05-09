@@ -26,6 +26,7 @@ public class UtilisateurBLL {
 	public Utilisateur selectByLoginOnly(String pseudo) {
 		return dao.selectByLoginOnly(pseudo);
 	}
+	
 	public Utilisateur selectById(int no_utilisateur) {
 		return dao.selectById(no_utilisateur);
 	}

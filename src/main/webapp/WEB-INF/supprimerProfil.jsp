@@ -11,8 +11,7 @@
 <form name="supprimerForm" method="post" action="supprimerProfil">
 <h2> Etes vous sûr de vouloir supprimer votre profil ? (pseudo : ${user.pseudo})</h2>
 <div class="mb-3">
-
-    <p>No_utilisateur : ${user.no_utilisateur}</p>
+    <p style="display:none;">No_utilisateur : ${user.no_utilisateur}</p>
       <button type="submit" class="btn btn-success">Supprimer</button>
 </div>
 </form>
