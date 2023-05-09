@@ -23,7 +23,7 @@
           <a class="nav-link active" aria-current="page" href="./">Encheres</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="">Vendre un article</a>
+          <a class="nav-link active" href="./vendreArticle">Vendre un article</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="./afficherProfil">Mon profil</a>
@@ -32,6 +32,9 @@
           <a class="nav-link active" aria-current="page" href="./deconnexion">Deconnexion</a>
         </li>
       </ul>
+      </div>
+      </div>
+      </nav>
       <%} else{ %>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -51,9 +54,10 @@
         </li>
       </ul>
       </form>
-      <% } %>
+
     </div>
   </div>
-</nav>
+</nav>     
+<% } %>
 </body>
 </html>

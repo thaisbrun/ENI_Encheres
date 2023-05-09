@@ -126,8 +126,8 @@ public class UtilisateurBLL {
 		List<Utilisateur> results = dao.selectAll();
 		System.out.println(results);
 		for(Utilisateur user : results) {
-			System.out.println("validationAjoutUtilisateur [BDD] - Pseudo: " + user.getPseudo() + " / Email: " + user.getEmail());
-			System.out.println("validationAjoutUtilisateur [USER] - Pseudo: " + utilisateur.getPseudo() + " / Email: " + utilisateur.getEmail());
+			//System.out.println("validationAjoutUtilisateur [BDD] - Pseudo: " + user.getPseudo() + " / Email: " + user.getEmail());
+			//System.out.println("validationAjoutUtilisateur [USER] - Pseudo: " + utilisateur.getPseudo() + " / Email: " + utilisateur.getEmail());
 			
 			//Vérificatrion mdp1 & mdp2 sont égaux
 			Utilisateur resultLogin = selectByLoginOnly(utilisateur.getPseudo());
