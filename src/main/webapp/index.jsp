@@ -26,6 +26,7 @@
 </div>
 </div>
 <div class="container">
+<<<<<<< HEAD
 <div class="row">
 	<c:forEach items="${listeEncheres}" var="enchere">
 	<!-- Créer une variable qui pour chaque enchere recupère l'utilisateur associée -->
@@ -49,5 +50,14 @@
 	</c:forEach>
 </div>
 
+=======
+<c:forEach items="${listeEncheres}" var="enchere">
+<p>${enchere.no_utilisateur}</p>
+<p>${enchere.no_article }</p>
+<p>${enchere.dateEnchere}</p>
+<p>${enchere.montant_enchere}</p>
+</c:forEach>
+</div>
+>>>>>>> branch 'master' of https://github.com/thaisbrun/ENI_Encheres.git
 </body>
 </html>

@@ -68,7 +68,7 @@ public class ConnexionServlet extends HttpServlet {
     			//SI pas nul : on charge en session et on redirige vers l'accueil
     		HttpSession session = request.getSession();
     		session.setAttribute("user",u);
-    		System.out.println(u.toString());
+    		System.out.println(u.getPrenom());
 			
 			RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
 			rd.forward(request, response);     

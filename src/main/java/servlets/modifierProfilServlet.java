@@ -35,17 +35,8 @@ public class modifierProfilServlet extends HttpServlet {
 		/* HttpSession session = request.getSession();
 		System.out.print (request.getSession().getId());
 		Utilisateur u = (Utilisateur) session.getAttribute("user"); */
-        Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setPseudo("titi");
-		utilisateur.setNom("Brun");
-		utilisateur.setPrenom("Thaïs");
-		utilisateur.setEmail("thais@outlook.fr");
-		utilisateur.setTelephone("0640295077");
-		utilisateur.setRue("17 avenue du lac");
-		utilisateur.setMotDePasse("mdp");
-		utilisateur.setCodePostal("49000");
-		utilisateur.setVille("Angers");
-		request.setAttribute("utilisateur", utilisateur);
+	    Utilisateur utilisateur = new Utilisateur();
+	    request.setAttribute("utilisateur", utilisateur);
 
 		request.getRequestDispatcher("/WEB-INF/modifierProfil.jsp").forward(request, response);
 	

@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bll.UtilisateurBLL;
-import bo.Utilisateur;
-
 /**
- * Servlet implementation class ProfilServlet
+ * Servlet implementation class deconnexionServlet
  */
-@WebServlet("/afficherProfil")
-public class ProfilServlet extends HttpServlet {
+@WebServlet("/deconnexion")
+public class deconnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfilServlet() {
+    public deconnexionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +27,11 @@ public class ProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* HttpSession session = request.getSession();
-		System.out.print (request.getSession().getId());
-		Utilisateur u = (Utilisateur) session.getAttribute("user"); */
-        Utilisateur utilisateur = new Utilisateur();
-		request.setAttribute("utilisateur", utilisateur);
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		session.invalidate();
 
-		request.getRequestDispatcher("/WEB-INF/afficherProfil.jsp").forward(request, response);
+		request.getRequestDispatcher("./index.jsp").forward(request, response);
 	}
 
 	/**

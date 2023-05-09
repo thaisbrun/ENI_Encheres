@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bll.UtilisateurBLL;
+import bo.Utilisateur;
 
 /**
  * Servlet implementation class supprimerProfil
@@ -32,7 +33,10 @@ public class supprimerProfilServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	    Utilisateur utilisateur = new Utilisateur();
+	    request.setAttribute("utilisateur", utilisateur);
+
+		request.getRequestDispatcher("/WEB-INF/supprimerProfil.jsp").forward(request, response);
 	}
 
 	/**
@@ -41,17 +45,19 @@ public class supprimerProfilServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// read form fields
-        int no_utilisateur = Integer.parseInt(request.getParameter("no_utilisateur"));
+        int no_utilisateur = ((Utilisateur) request.getSession().getAttribute("user")).getNo_utilisateur();
  
         // do some processing here...
       
         UtilisateurBLL utilisateurBll = new UtilisateurBLL();
 		utilisateurBll.SupprimerUtilisateur(no_utilisateur);
+					
 		HttpSession session = request.getSession();
-		session.invalidate();
+			session.invalidate();
 		
 			//Si tout se passe bien, je vais vers la page de consultation:
-			RequestDispatcher rd = request.getRequestDispatcher("./");
+			RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
+
 			rd.forward(request, response);
          	
 	}

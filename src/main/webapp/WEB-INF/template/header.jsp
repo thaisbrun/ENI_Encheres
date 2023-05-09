@@ -18,7 +18,6 @@
           <a class="nav-link active" aria-current="page" href="./">ENI-Enchères </a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="./">Encheres</a>
@@ -30,10 +29,9 @@
           <a class="nav-link active" aria-current="page" href="./afficherProfil">Mon profil</a>
         </li>
         <li class="nav-item">
-          <button class="btn btn-link" onclick="<%{ session.invalidate(); } %>">Déconnexion</button>
+          <a class="nav-link active" aria-current="page" href="./deconnexion">Deconnexion</a>
         </li>
       </ul>
-      </form>
       <%} else{ %>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
