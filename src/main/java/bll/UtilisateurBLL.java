@@ -28,37 +28,17 @@ public class UtilisateurBLL {
 	public Utilisateur selectByLoginOnly(String pseudo) {
 		return dao.selectByLoginOnly(pseudo);
 	}
-	
-<<<<<<< HEAD
+
 	public Utilisateur selectByEmailOnly(String email) {
 		return dao.selectByLoginOnly(email);
-=======
+	}
+	
 	public Utilisateur selectById(int no_utilisateur) {
 		return dao.selectById(no_utilisateur);
 	}
-
-	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse)
-		{
-			
-			Utilisateur utilisateur = null;
-			
-				utilisateur = new Utilisateur();
-				utilisateur.setPseudo(pseudo);
-				utilisateur.setNom(nom);
-				utilisateur.setPrenom(prenom);
-				utilisateur.setRue(rue);
-				utilisateur.setCodePostal(codePostal);
-				utilisateur.setEmail(email);
-				utilisateur.setMotDePasse(motDePasse);
-				utilisateur.setTelephone(telephone);
-				utilisateur.setVille(ville);
-				this.dao.insert(utilisateur);
-				
-			return utilisateur;
->>>>>>> branch 'master' of https://github.com/thaisbrun/ENI_Encheres.git
-	}
 	
-	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse) throws BLLException{
+	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse) throws BLLException
+	{
 		
 		Utilisateur utilisateur = null;
 			utilisateur = new Utilisateur();
