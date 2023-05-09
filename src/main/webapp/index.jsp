@@ -49,15 +49,5 @@
 		<p>${enchere.montant_enchere}</p>
 	</c:forEach>
 </div>
-
-=======
-<c:forEach items="${listeEncheres}" var="enchere">
-<p>${enchere.no_utilisateur}</p>
-<p>${enchere.no_article }</p>
-<p>${enchere.dateEnchere}</p>
-<p>${enchere.montant_enchere}</p>
-</c:forEach>
-</div>
->>>>>>> branch 'master' of https://github.com/thaisbrun/ENI_Encheres.git
 </body>
 </html>
