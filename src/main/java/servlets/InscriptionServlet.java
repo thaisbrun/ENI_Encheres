@@ -56,12 +56,16 @@ public class InscriptionServlet extends HttpServlet {
         String codePostal = request.getParameter("codePostal");   
         String ville = request.getParameter("ville");
         String motDePasse = request.getParameter("motDePasse");
+        String motDePasse2 = request.getParameter("motDePasse2");
  
         // do some processing here...
       
         UtilisateurBLL utilisateurBll = new UtilisateurBLL();
         try {
 			utilisateurBll.ajouterUtilisateur(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
+			//System.out.println("motDePasse: " + motDePasse);
+			//System.out.println("motDePasse2: " + motDePasse2);
+			//utilisateurBll.isMotDePasseValide(motDePasse, motDePasse2);
 			RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
 			rd.forward(request, response);
 			

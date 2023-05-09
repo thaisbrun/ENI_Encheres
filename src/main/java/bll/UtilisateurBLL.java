@@ -101,8 +101,8 @@ public class UtilisateurBLL {
 		if (utilisateur.getEmail() == null || utilisateur.getEmail().isBlank()) {
 			throw new BLLException("L'email ne peut pas être vide");
 		}
-		if (utilisateur.getTelephone() == null || utilisateur.getTelephone().isBlank()) {
-			throw new BLLException("Le téléphone ne peut pas être vide");
+		if (utilisateur.getTelephone() == null || utilisateur.getTelephone().isBlank() || !utilisateur.getTelephone().matches("[0-9]+")) {
+			throw new BLLException("Le téléphone ne peut pas être vide et ne peut etre composé uniquement de nombres");
 		}
 		if (utilisateur.getRue() == null || utilisateur.getRue().isBlank()) {
 			throw new BLLException("La rue ne peut pas être vide");
@@ -121,32 +121,23 @@ public class UtilisateurBLL {
 	}
 	
 	public void validationAjouterUtilisateur(Utilisateur utilisateur) throws BLLException{
-		//Requete pour selectionner tout les utilisateurs dont le pseudo est égale à ...
-		//Requete pour selectionner tout les utilisateurs dont l'email est eagale à ... 
 		List<Utilisateur> results = dao.selectAll();
-		
+		System.out.println(results);
 		for(Utilisateur user : results) {
 			System.out.println("validationAjoutUtilisateur [BDD] - Pseudo: " + user.getPseudo() + " / Email: " + user.getEmail());
 			System.out.println("validationAjoutUtilisateur [USER] - Pseudo: " + utilisateur.getPseudo() + " / Email: " + utilisateur.getEmail());
 			
-			if(user.getPseudo().equals(utilisateur.getPseudo())) {
-				System.out.println("validationAjoutUtilisateur - PSEUDO");
-				throw new BLLException("Le pseudo est déja pris");
-			}
-			if(user.getEmail().equals(utilisateur.getEmail())) {
-				System.out.println("validationAjoutUtilisateur - EMAIL");
-				throw new BLLException("L'email est déja liée à un autre utilisateur");
-			}
 			//Vérificatrion mdp1 & mdp2 sont égaux
-			Utilisateur result = selectByLoginOnly(utilisateur.getPseudo());
-			if(result != null) {
+			Utilisateur resultLogin = selectByLoginOnly(utilisateur.getPseudo());
+			if(resultLogin != null) {
 			throw new BLLException("le pseudo est déja pris");
 			}
 			
-			result = selectByEmailOnly(utilisateur.getEmail());
-			if(result != null) {
-			throw new BLLException("L'email est déja liée à un autre utilisateur");
-			}
+			//Utilisateur resultEmail = selectByEmailOnly(utilisateur.getEmail());
+			//System.out.println("2 " + resultEmail);
+			//if(resultEmail != null) {
+			//throw new BLLException("L'email est déja liée à un autre utilisateur");
+			//}
 		}
 	}
 	
@@ -156,6 +147,12 @@ public class UtilisateurBLL {
 		    isAlpha = true;
 		}
 		return isAlpha;
+	}
+	
+	public void isMotDePasseValide(String mp, String mp2 ) throws BLLException{
+		if(mp != mp2) {
+			throw new BLLException("Les 2 mots de passes sont différents");
+		}
 	}
 }
 

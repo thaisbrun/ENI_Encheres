@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import bll.BLLException;
 import bo.Utilisateur;
 import dal.ConnectionProvider;
 import dal.UtilisateurDAO;
@@ -17,7 +15,7 @@ import dal.UtilisateurDAO;
  */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	//private static final String SELECT_BY_ID = "SELECT * FROM utilisateurs WHERE no_utilisateur = ?;";
-	private static final String SELECT_ALL = "SELECT pseudo, mot_de_passe FROM utilisateurs;";
+	private static final String SELECT_ALL = "SELECT * FROM utilisateurs;";
 	private static final String SELECT_BY_LOGINONLY = "SELECT * FROM utilisateurs WHERE pseudo = ?;";
 	private static final String SELECT_BY_EMAILONLY= "SELECT * FROM utilisateurs WHERE email = ?;";
 	private static final String INSERT = "INSERT INTO utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,100,0);";
@@ -146,15 +144,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	public Utilisateur selectByEmailOnly(String email) {
 		Utilisateur utilisateur = null;
-		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
 			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_EMAILONLY);
 			
-			// 3e etape : attribuer les parametres nécessaires à ma requête
 			ps.setString(1, email);
-			// 4e etape : execution de la requete et interpretation des resultats
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				utilisateur = new Utilisateur();
@@ -228,36 +222,4 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	/*@Override
-	public void insert(Repas repas) {
-		// 1e etape : ouvrir la connexion a la bdd
-		try (Connection cnx = ConnectionProvider.getConnection();) {
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
-			PreparedStatement ps =
-					cnx.prepareStatement(INSERT,
-										PreparedStatement.RETURN_GENERATED_KEYS);
-			
-			// 3e etape : attribuer les parametres nécessaires à ma requête
-			ps.setDate(1, Date.valueOf(repas.getDate()));
-			ps.setTime(2, Time.valueOf(repas.getHeure()));
-			
-			// 4e etape : execution de la requete et interpretation des resultats
-			ps.executeUpdate();
-			ResultSet rs = ps.getGeneratedKeys();
-			if (rs.next()) {
-				int id = rs.getInt(1);
-				repas.setId(id);
-			}
-			
-			for (Aliment current : repas.getAliments()) {
-				PreparedStatement ps2 = cnx.prepareStatement(INSERT_ALIMENT);
-				ps2.setString(1, current.getNom());
-				ps2.setInt(2, repas.getId());
-				ps2.executeUpdate();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
 }

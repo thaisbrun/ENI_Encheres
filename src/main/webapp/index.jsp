@@ -29,7 +29,6 @@
 <div class="row">
 	<c:forEach items="${listeEncheres}" var="enchere">
 	<!-- Créer une variable qui pour chaque enchere recupère l'utilisateur associée -->
-	<c:set var="user" scope="I" value="${Utilisateur.ge }">
 	<div class="col-xl-3 col-lg-4 col-md-6 mb-4">
         <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-1.jpg" alt="" class="img-fluid card-img-top">
           <div class="p-4">
