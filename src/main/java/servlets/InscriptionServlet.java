@@ -63,7 +63,7 @@ public class InscriptionServlet extends HttpServlet {
         UtilisateurBLL utilisateurBll = new UtilisateurBLL();
 		utilisateurBll.ajouterUtilisateur(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
 			//Si tout se passe bien, je vais vers la page de consultation:
-			RequestDispatcher rd = request.getRequestDispatcher("./");
+			RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
 			rd.forward(request, response);
          
 	}
