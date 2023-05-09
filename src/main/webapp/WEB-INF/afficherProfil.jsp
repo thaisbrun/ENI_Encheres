@@ -12,30 +12,30 @@
 
 <div class="container text-center">
 <div class="mb-3">
-    <p>Pseudo : ${utilisateur.pseudo }</p>
+    <p>Pseudo : ${user.pseudo }</p>
 </div>
 
 <div class="mb-3">
-    <p>Nom : ${utilisateur.nom }</p>
+    <p>Nom : ${user.nom }</p>
  </div>
 
 <div class="mb-3">
-    <p>${utilisateur.prenom}</p>
+    <p>Prénom : ${user.prenom}</p>
 </div>
 <div class="mb-3">
-    <p>Email : ${utilisateur.email}</p>
+    <p>Email : ${user.email}</p>
 </div>
 <div class="mb-3">
-    <p>Telephone : ${utilisateur.telephone}</p>
+    <p>Telephone : ${user.telephone}</p>
 </div>
 <div class="mb-3">
-    <p>Rue : ${utilisateur.rue}</p>
+    <p>Rue : ${user.rue}</p>
 </div>
 <div class="mb-3">
-    <p>Code Postal : ${utilisateur.codePostal}</p>
+    <p>Code Postal : ${user.codePostal}</p>
 </div>
 <div class="mb-3">
-    <p>Ville : ${utilisateur.ville}</p>
+    <p>Ville : ${user.ville}</p>
 </div>
 <a href="./modifierProfil" class="btn btn-primary">Modifier mon profil</a>
 </div>

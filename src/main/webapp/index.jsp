@@ -32,6 +32,6 @@
 <p>${enchere.dateEnchere}</p>
 <p>${enchere.montant_enchere}</p>
 </c:forEach>
-
+</div>
 </body>
 </html>

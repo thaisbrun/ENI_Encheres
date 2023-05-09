@@ -2,7 +2,7 @@ package bo;
 
 public class Utilisateur {
 	
-	private int noUtilisateur;
+	private int no_utilisateur;
 	private String pseudo;
 	private String nom;
 	private String prenom;
@@ -15,10 +15,10 @@ public class Utilisateur {
 	private int credit;
 	private boolean administrateur;
 	
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+	public Utilisateur(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		super();
-		this.noUtilisateur = noUtilisateur;
+		this.no_utilisateur = no_utilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -34,12 +34,12 @@ public class Utilisateur {
 	
 	public Utilisateur() {}
 
-	public int getNoUtilisateur() {
-		return noUtilisateur;
+	public int getNo_utilisateur() {
+		return no_utilisateur;
 	}
 	
-	public void setNoUtilisateur(int noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setNo_utilisateur(int no_utilisateur) {
+		this.no_utilisateur = no_utilisateur;
 	}
 	
 	public String getPseudo() {

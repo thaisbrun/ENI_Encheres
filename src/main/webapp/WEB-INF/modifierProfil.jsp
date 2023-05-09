@@ -15,23 +15,23 @@
 <div class="col">
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Pseudo</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${utilisateur.pseudo}" name="pseudo" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.pseudo}" name="pseudo" id="exampleInputEmail1" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Prénom</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${utilisateur.prenom}" name="prenom" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.prenom}" name="prenom" id="exampleInputEmail1" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Telephone</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${utilisateur.telephone}" name="telephone" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.telephone}" name="telephone" id="exampleInputEmail1" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Code Postal</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${utilisateur.codePostal}" name="codePostal" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.codePostal}" name="codePostal" id="exampleInputEmail1" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Mot de passe actuel </label>
-    <input type="password" style="width:300px;margin-left:500px;" class="form-control" value="${utilisateur.motDePasse}" name="motDePasse" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="password" style="width:300px;margin-left:500px;" class="form-control" value="${user.motDePasse}" name="motDePasse" id="exampleInputEmail1" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Nouveau mot de passe </label>
@@ -41,21 +41,21 @@
 <div class="col">
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Nom</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${utilisateur.nom}" name="nom" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.nom}" name="nom" id="exampleInputEmail1" aria-describedby="emailHelp">
 </div>
 
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${utilisateur.email}" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.email}" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Rue</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${utilisateur.rue}" name="rue" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.rue}" name="rue" id="exampleInputEmail1" aria-describedby="emailHelp">
 </div>
 
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Ville</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${utilisateur.ville}" name="ville" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.ville}" name="ville" id="exampleInputEmail1" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Confirmation </label>
@@ -64,10 +64,7 @@
 </div>
 <button type="submit" class="btn btn-primary">Enregistrer</button>
 </form>
-  <form name="supprimerForm" method="post" action="./supprimerProfil">
-      <input type="text" style="width:300px;margin-left:500px;display:none;" class="form-control" value="valuenoutilisateur" name="no_utilisateur" id="exampleInputEmail1" aria-describedby="emailHelp">
-<button type="submit" class="btn btn-primary">Supprimer mon compte</button>
-</form>
+<a href="./supprimerProfil" class="btn btn-primary">Supprimer mon compte</a>
 </div>
 </div>
 

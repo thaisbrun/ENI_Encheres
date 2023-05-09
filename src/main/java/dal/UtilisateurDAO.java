@@ -12,6 +12,8 @@ public interface UtilisateurDAO {
 	/*public void update(Utilisateur utilisateur) throws DALException; */
 	
 	public void delete(Utilisateur utilisateur);
+
+	public Utilisateur selectById(int no_utilisateur);
 	
 	public Utilisateur selectByLoginOnly(String pseudo);
 	

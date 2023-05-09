@@ -26,7 +26,9 @@ public class UtilisateurBLL {
 	public Utilisateur selectByLoginOnly(String pseudo) {
 		return dao.selectByLoginOnly(pseudo);
 	}
-	
+	public Utilisateur selectById(int no_utilisateur) {
+		return dao.selectById(no_utilisateur);
+	}
 
 	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse)
 		{
@@ -51,9 +53,8 @@ public class UtilisateurBLL {
 	public Utilisateur ModifierUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse)
 	{
 		
-		Utilisateur utilisateur = null;
+		Utilisateur utilisateur = selectByLoginOnly(pseudo);
 		
-			utilisateur = new Utilisateur();
 			utilisateur.setPseudo(pseudo);
 			utilisateur.setNom(nom);
 			utilisateur.setPrenom(prenom);
@@ -71,11 +72,9 @@ public class UtilisateurBLL {
 	public Utilisateur SupprimerUtilisateur(int no_utilisateur)
 	{
 		
-		Utilisateur utilisateur = null;
-		
-			utilisateur = new Utilisateur();
-			utilisateur.setNoUtilisateur(no_utilisateur);
-			this.dao.update(utilisateur);
+		Utilisateur utilisateur = selectById(no_utilisateur);
+		utilisateur.setNo_utilisateur(no_utilisateur);
+			this.dao.delete(utilisateur);
 			
 		return utilisateur;
 }

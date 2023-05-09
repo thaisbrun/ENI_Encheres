@@ -36,14 +36,6 @@ public class ProfilServlet extends HttpServlet {
 		System.out.print (request.getSession().getId());
 		Utilisateur u = (Utilisateur) session.getAttribute("user"); */
         Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setPseudo("titi");
-		utilisateur.setNom("Brun");
-		utilisateur.setPrenom("Thaïs");
-		utilisateur.setEmail("travailthais@outlook.fr");
-		utilisateur.setTelephone("0640295077");
-		utilisateur.setRue("17 avenue Marie Talet");
-		utilisateur.setCodePostal("49000");
-		utilisateur.setVille("Angers");
 		request.setAttribute("utilisateur", utilisateur);
 
 		request.getRequestDispatcher("/WEB-INF/afficherProfil.jsp").forward(request, response);
