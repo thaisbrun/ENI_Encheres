@@ -20,10 +20,6 @@ public class EnchereBLL {
 		return dao.selectAll();
 	}
 	
-	public ArticleVendu getArticleFromEnchere(Enchere enchere){
-		return enchere.getArticleVendu();
-	}
-	
 	public String getDateEnchereFormatedString(LocalDate date) {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("DD/MM/YY");
 		return date.format(dateTimeFormatter);

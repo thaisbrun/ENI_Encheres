@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@page import="bo.Utilisateur"%>
-    <%@include file="template/header.jsp" %>
+<%@include file="template/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,19 +9,35 @@
 </head>
 <body>
 </br>
-<p>Pseudo : ${user.pseudo }
-</br>
-	Nom : ${user.nom }
-</br>
-	Prénom : ${user.prenom } 
-</br>
-	Email : ${user.email } 
-</br>
-    Téléphone : ${user.telephone } 
-</br>
-    Rue : ${user.rue }
-</br>
-    Code Postal : ${user.codePostal } </p>
 
+<div class="container text-center">
+<div class="mb-3">
+    <p>Pseudo : ${utilisateur.pseudo }</p>
+</div>
+
+<div class="mb-3">
+    <p>Nom : ${utilisateur.nom }</p>
+ </div>
+
+<div class="mb-3">
+    <p>${utilisateur.prenom}</p>
+</div>
+<div class="mb-3">
+    <p>Email : ${utilisateur.email}</p>
+</div>
+<div class="mb-3">
+    <p>Telephone : ${utilisateur.telephone}</p>
+</div>
+<div class="mb-3">
+    <p>Rue : ${utilisateur.rue}</p>
+</div>
+<div class="mb-3">
+    <p>Code Postal : ${utilisateur.codePostal}</p>
+</div>
+<div class="mb-3">
+    <p>Ville : ${utilisateur.ville}</p>
+</div>
+<a href="./modifierProfil" class="btn btn-primary">Modifier mon profil</a>
+</div>
 </body>
 </html>

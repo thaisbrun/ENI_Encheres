@@ -9,12 +9,38 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </head>
 <body>
+<% if(session.getAttribute("user") != null) { %>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="./">ENI-Enchères </a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./">Encheres</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="">Vendre un article</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./afficherProfil">Mon profil</a>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-link" onclick="<%{ session.invalidate(); } %>">Déconnexion</button>
+        </li>
+      </ul>
+      </form>
+      <%} else{ %>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          ENI-Enchères
         </li>
       </ul>
       <form class="d-flex" role="search">
@@ -27,6 +53,7 @@
         </li>
       </ul>
       </form>
+      <% } %>
     </div>
   </div>
 </nav>

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bll.UtilisateurBLL;
 import bo.Utilisateur;
@@ -46,6 +47,7 @@ public class ConnexionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
@@ -64,10 +66,11 @@ public class ConnexionServlet extends HttpServlet {
     		}  
     		else{
     			//SI pas nul : on charge en session et on redirige vers l'accueil
-    		request.getSession().setAttribute("user",u);
+    		HttpSession session = request.getSession();
+    		session.setAttribute("user",u);
     		System.out.println(u.toString());
 			
-			RequestDispatcher rd = request.getRequestDispatcher("./");
+			RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
 			rd.forward(request, response);     
     		}
     		

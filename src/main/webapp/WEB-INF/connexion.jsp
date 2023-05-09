@@ -17,19 +17,19 @@
     <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
     <input type="password" style="width:300px;margin-left:500px;" class="form-control" name="motDePasse" id="exampleInputPassword1">
   </div>
-   <div class="row align-items-center">
+  <div class="row align-items-center">
    <div class="col">
   <button type="submit" class="btn btn-primary">Connexion</button>
   &nbsp;
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
   <label class="form-check-label" for="flexSwitchCheckDefault"> Se souvenir de moi</label>
-    <p><a href='./motDePasse'>Mot de passe oublié </a></p>
+    <p><a href='./motDePasse'>Mot de passe oublié </a></p> 
     </div>
     </div>
 </br>      		  
 </br>
 </br>
-<button href="./inscription" class="btn btn-outline-info btn-lg">Créer un compte</button>
+<a href="./inscription" class="btn btn-outline-info btn-lg">Créer un compte</a>
       		 
 </form>
 </div>
