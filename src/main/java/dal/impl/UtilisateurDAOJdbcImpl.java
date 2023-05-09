@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import bll.BLLException;
 import bo.Utilisateur;
 import dal.ConnectionProvider;
 import dal.UtilisateurDAO;
@@ -13,43 +16,49 @@ import dal.UtilisateurDAO;
  * Implémentation des méthodes proposées par RepasDAO
  */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
-	//private static final String SELECT_ALL = "SELECT pseudo, mot_de_passe FROM utilisateurs;";
+	private static final String SELECT_ALL = "SELECT * FROM utilisateurs;";
 	private static final String SELECT_BY_ID = "SELECT * FROM utilisateurs WHERE no_utilisateur = ?;";
+	private static final String SELECT_BY_PSEUDO = "SELECT * FROM utilisateurs WHERE pseudo = ?;";
+	private static final String SELECT_BY_EMAIL = "SELECT * FROM utilisateurs WHERE email = ?;";
 	private static final String INSERT = "INSERT INTO utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,100,0);";
 	//private static final String INSERT_ALIMENT = "INSERT INTO aliments(nom, id_repas) VALUES (?,?);";
 	private static final String SELECT_BY_LOGIN = "SELECT * FROM utilisateurs WHERE pseudo = ? AND mot_de_passe = ?;";
 
-	//@Override
-	/*public List<Utilisateur> selectAll() {
+	@Override
+	public List<Utilisateur> selectAll() {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<>();
-		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
 			PreparedStatement ps = cnx.prepareStatement(SELECT_ALL);
-			Utilisateur utilisateur = new Utilisateur();
 			
-				String prenom = utilisateur.getPrenom();
-				String pseudo = utilisateur.getPseudo();
-				String motDePasse = utilisateur.getMotDePasse();
-				
-				listeUtilisateurs.add(utilisateur);
-				
-// 4e etape : execution de la requete et interpretation des resultats
-				
+			Utilisateur resultat;
 			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				resultat = new Utilisateur();
+				resultat.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				resultat.setPseudo(rs.getString("pseudo"));
+				resultat.setNom(rs.getString("nom"));
+				resultat.setPrenom(rs.getString("prenom"));
+				resultat.setEmail(rs.getString("email"));
+				resultat.setTelephone(rs.getString("telephone"));
+				resultat.setRue(rs.getString("rue"));
+				resultat.setCodePostal(rs.getString("code_postal"));
+				resultat.setVille(rs.getString("ville"));
+				resultat.setMotDePasse(rs.getString("mot_de_passe"));
+				resultat.setCredit(rs.getInt("credit"));
+				resultat.setAdministrateur(rs.getBoolean("administrateur"));
+				
+				listeUtilisateurs.add(resultat);
+			}
 			rs.close();
 			ps.close();
 			cnx.commit();
-		} catch (SQLException e) {
+			
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return listeUtilisateurs;
 	}
-	@Override
-	public Utilisateur selectById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+	
 	@Override
 	public void insert(Utilisateur utilisateur) {
 		// 1e etape : ouvrir la connexion a la bdd
@@ -83,7 +92,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 	}
 
-	public Utilisateur connexionByLogin(String pseudo, String motDePasse) {
+	public Utilisateur connexionByLogin(String pseudo, String motDePasse){
 		Utilisateur utilisateur = null;
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -132,6 +141,45 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				System.out.println("UtilistaeurBLL - Test : n°3");
 				resultat = new Utilisateur();
 				resultat.setNoUtilisateur(id);
+				resultat.setPseudo(rs.getString("pseudo"));
+				resultat.setNom(rs.getString("nom"));
+				resultat.setPrenom(rs.getString("prenom"));
+				resultat.setEmail(rs.getString("email"));
+				resultat.setTelephone(rs.getString("telephone"));
+				resultat.setRue(rs.getString("rue"));
+				resultat.setCodePostal(rs.getString("code_postal"));
+				resultat.setVille(rs.getString("ville"));
+				resultat.setMotDePasse(rs.getString("mot_de_passe"));
+				resultat.setCredit(rs.getInt("credit"));
+				resultat.setAdministrateur(rs.getBoolean("administrateur"));
+			}
+			System.out.println("UtilistaeurBLL - Test : n°4");
+			rs.close();
+			ps.close();
+			cnx.commit();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("UtilistaeurBLL - Test : n°5");
+		return resultat;
+	}
+	
+	@Override
+	public Utilisateur selectByPseudo(String pseudo) {
+		System.out.println("UtilistaeurBLL - Test : n°1");
+		Utilisateur resultat = null;
+		
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_PSEUDO);
+			System.out.println("UtilistaeurBLL - Test : n°2");
+			ps.setString(1, pseudo);
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				System.out.println("UtilistaeurBLL - Test : n°3");
+				resultat = new Utilisateur();
+				resultat.setNoUtilisateur(rs);
 				resultat.setPseudo(rs.getString("pseudo"));
 				resultat.setNom(rs.getString("nom"));
 				resultat.setPrenom(rs.getString("prenom"));

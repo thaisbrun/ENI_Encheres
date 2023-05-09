@@ -2,6 +2,9 @@ package dal;
 
 
 import bo.Utilisateur;
+import java.util.List;
+
+import bll.BLLException;
 
 public interface UtilisateurDAO {
 	
@@ -15,5 +18,5 @@ public interface UtilisateurDAO {
 	
 	public Utilisateur connexionByLogin(String pseudo, String motDePasse);
 	
-	//public List<Utilisateur> selectAll();
+	public List<Utilisateur> selectAll();
 }

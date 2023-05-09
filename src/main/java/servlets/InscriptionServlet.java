@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bll.BLLException;
 import bll.UtilisateurBLL;
-import bo.Utilisateur;
 
 /**
  * Servlet implementation class Connexion
@@ -61,11 +60,24 @@ public class InscriptionServlet extends HttpServlet {
         // do some processing here...
       
         UtilisateurBLL utilisateurBll = new UtilisateurBLL();
-		utilisateurBll.ajouterUtilisateur(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
-			//Si tout se passe bien, je vais vers la page de consultation:
-			RequestDispatcher rd = request.getRequestDispatcher("./");
+        try {
+			utilisateurBll.ajouterUtilisateur(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
+			RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
 			rd.forward(request, response);
-         
+			
+		} catch (BLLException e) {
+			System.out.println(e.getMessage());
+			request.setAttribute("erreur", e.getMessage());
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+			rd.forward(request, response);
+		}
+        
+        
+		//utilisateurBll.ajouterUtilisateur(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
+		
+		//RequestDispatcher rd = request.getRequestDispatcher("./");
+		//rd.forward(request, response);
 	}
 
 }

@@ -1,6 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@include file="template/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,13 @@
 <div class="container text-center">
 <h2>Mon profil</h2>
 <br>
+  <c:choose>
+  	<c:when test="${not empty erreur }">
+  		<div class="alert alert-danger" role="alert">
+  			<c:out value="${erreur}"/>
+  		</div>
+  	</c:when>
+  </c:choose>
 <form name="inscriptionForm" method="post" action="inscription">
   <div class="row align-items-start">
     <div class="col">
@@ -70,7 +78,7 @@
   </div>
   <div class="mb-3">
     <button href="./" class="btn btn-warning">Annuler</button>
-    </div>
+  </div>
     </div>
   </div>
 </form>

@@ -1,5 +1,8 @@
 package bll;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import bo.Utilisateur;
 import dal.DAOFactory;
 import dal.UtilisateurDAO;
@@ -27,34 +30,42 @@ public class UtilisateurBLL {
 		return dao.selectById(id);
 	}
 	
-<<<<<<< HEAD
-	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse){
-=======
-	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse)
-		{
->>>>>>> branch 'master' of https://github.com/thaisbrun/ENI_Encheres.git
+	public Utilisateur ajouterUtilisateur(String pseudo,String nom,String prenom,String email,String telephone,String rue,String codePostal, String ville,String motDePasse) throws BLLException{
+		
+		Utilisateur utilisateur = null;
 			
-			Utilisateur utilisateur = null;
+			utilisateur = new Utilisateur();
+			utilisateur.setPseudo(pseudo);
+			utilisateur.setNom(nom);
+			utilisateur.setPrenom(prenom);
+			utilisateur.setRue(rue);
+			utilisateur.setCodePostal(codePostal);
+			utilisateur.setEmail(email);
+			utilisateur.setMotDePasse(motDePasse);
+			utilisateur.setTelephone(telephone);
+			utilisateur.setVille(ville);
 			
-				utilisateur = new Utilisateur();
-				utilisateur.setPseudo(pseudo);
-				utilisateur.setNom(nom);
-				utilisateur.setPrenom(prenom);
-				utilisateur.setRue(rue);
-				utilisateur.setCodePostal(codePostal);
-				utilisateur.setEmail(email);
-				utilisateur.setMotDePasse(motDePasse);
-				utilisateur.setTelephone(telephone);
-				utilisateur.setVille(ville);
-				this.dao.insert(utilisateur);
+			validationGeneral(utilisateur);
+			
+			this.dao.insert(utilisateur);
 				
-			return utilisateur;
+		return utilisateur;
 	}
+	
+	public Utilisateur getPseudoOrEmailDuplicata(String type, Utilisateur user) {
+		if(type.equals("pseudo")) {
+			return user;
+		}
+		if(type.equals("email")) {
+			return user;
+		}
+	}
+
 	
 	//VERIFICATIONS
 	public void validationGeneral(Utilisateur utilisateur) throws BLLException {
 		
-		if (utilisateur.getPseudo() == null || utilisateur.getPseudo().isBlank() || !isAlphanumerique(utilisateur.getPseudo().toString())) {
+		if (utilisateur.getPseudo() == null || utilisateur.getPseudo().isBlank() || isAlphanumerique(utilisateur.getPseudo().toString())) {
 			throw new BLLException("Le pseudo ne peut pas être vide et ne peut etre composé uniquement de lettres & chiffres");
 		}
 		if (utilisateur.getPrenom() == null || utilisateur.getPrenom().isBlank()) {
@@ -86,12 +97,23 @@ public class UtilisateurBLL {
 	}
 	
 	public void validationAjouterUtilisateur(Utilisateur utilisateur) throws BLLException{
-		Utilisateur result = selectById(utilisateur.getNoUtilisateur());
-		if(utilisateur.getPseudo() == result.getPseudo()) {
-			throw new BLLException("le pseudo est déja pris");
-		}
-		if(utilisateur.getEmail() == result.getEmail()) {
-			throw new BLLException("L'email est déja liée à un autre utilisateur");
+		//Requete pour selectionner tout les utilisateurs dont le pseudo est égale à ...
+		//Requete pour selectionner tout les utilisateurs dont l'email est eagale à ... 
+		List<Utilisateur> results = dao.selectAll();
+		
+		for(Utilisateur user : results) {
+			System.out.println("validationAjoutUtilisateur [BDD] - Pseudo: " + user.getPseudo() + " / Email: " + user.getEmail());
+			System.out.println("validationAjoutUtilisateur [USER] - Pseudo: " + utilisateur.getPseudo() + " / Email: " + utilisateur.getEmail());
+			
+			if(user.getPseudo().equals(utilisateur.getPseudo())) {
+				System.out.println("validationAjoutUtilisateur - PSEUDO");
+				throw new BLLException("Le pseudo est déja pris");
+			}
+			if(user.getEmail().equals(utilisateur.getEmail())) {
+				System.out.println("validationAjoutUtilisateur - EMAIL");
+				throw new BLLException("L'email est déja liée à un autre utilisateur");
+			}
+			//Vérificatrion mdp1 & mdp2 sont égaux
 		}
 	}
 	
