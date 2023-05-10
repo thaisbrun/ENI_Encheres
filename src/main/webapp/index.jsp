@@ -8,13 +8,61 @@
 <body>
 	<h1>Bienvenue</h1>
 <br>
-<div class="container text-center">
+<div class="container">
 <div class="row align-items-center">
 <form name="rechercheCategorieForm" method="get" action="rechercheCategorie">
 <div class="col-6">
   <label for="exampleFormControlInput1" class="form-label">Filtres : </label>
   <input type="text" name="nom_article" class="form-control" id="exampleFormControlInput1" placeholder="Le nom de l'article contient">
   <br>
+  <% if(session.getAttribute("user") != null) { %>
+  <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+  <label class="form-check-label" for="inlineRadio1">Achats</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    Enchères ouvertes
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    Mes enchères
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    Mes enchères ouvertes
+  </label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+  <label class="form-check-label" for="inlineRadio2">Mes ventes</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" name="ventesEnCours" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    Mes ventes en cours
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" name="ventesNonDebutees" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    Mes ventes non débutées 
+  </label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" name="ventesTerminees" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    Mes ventes terminées
+  </label>
+</div>
+<% } %>
 <select name="categorie" class="form-select" aria-label="Default select example">
   <option value="0">Toutes</option>
 <c:forEach items="${listeCategories}" var="categorie">
