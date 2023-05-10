@@ -35,8 +35,6 @@ public class ProfilServlet extends HttpServlet {
 		/* HttpSession session = request.getSession();
 		System.out.print (request.getSession().getId());
 		Utilisateur u = (Utilisateur) session.getAttribute("user"); */
-        Utilisateur utilisateur = new Utilisateur();
-		request.setAttribute("utilisateur", utilisateur);
 
 		request.getRequestDispatcher("/WEB-INF/afficherProfil.jsp").forward(request, response);
 	}

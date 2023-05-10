@@ -37,11 +37,15 @@
             <p><i class="bi bi-person-fill"></i>  ${enchere.getUtilisateur().getPseudo()}</p>
             <p class="small text-muted mb-0">${enchere.getArticle().getDescription() }</p>
             <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
-              <p style="color:red; weight:bold; margin: auto;">&euro;${enchere.getMontant_enchere() }</p>
+              <p style="color:red; weight:bold; margin: auto;"><strong>${enchere.getMontant_enchere()} </strong> Pts</p>
             </div>
-            <!-- <% if(session.getAttribute("user") != null) { %> -->
-            	<button href="" type="button" style="width:100%; margin-top: 20px;" class="btn btn-info rounded-pill btn-block" style="margin-top:20px;">Voir plus</button>
-            <!-- <% } %> -->
+            <% if(session.getAttribute("user") != null) { %>
+            <form method="get" action="visuEnchere" name="afficherEnchereForm" >
+            	<input name="no_utilisateur" value="${enchere.getUtilisateur().getNo_utilisateur()}" type="hidden">
+            	<input name="no_article" value="${enchere.getArticle().getNoArticle()}" type="hidden">
+            	<input type="submit" style="width:100%; margin-top: 20px;" class="btn btn-info rounded-pill btn-block" value="Détails">
+            </form>
+            <% } %>
           </div>
         </div>
       </div>
