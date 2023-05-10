@@ -39,6 +39,9 @@
             <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
               <p style="color:red; weight:bold; margin: auto;">&euro;${enchere.getMontant_enchere() }</p>
             </div>
+            <!-- <% if(session.getAttribute("user") != null) { %> -->
+            	<button href="" type="button" style="width:100%; margin-top: 20px;" class="btn btn-info rounded-pill btn-block" style="margin-top:20px;">Voir plus</button>
+            <!-- <% } %> -->
           </div>
         </div>
       </div>
