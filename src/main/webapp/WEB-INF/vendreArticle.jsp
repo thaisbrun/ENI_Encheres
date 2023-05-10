@@ -22,7 +22,7 @@
     <input type="text" class="form-control"  name="description" id="exampleInputEmail1" aria-describedby="emailHelp">
   </div>
   <div class="mb-3">
-  <select class="form-select" aria-label="Default select example">
+  <select name="categorie" class="form-select" aria-label="Default select example">
 <c:forEach items="${listeCategories}" var="categorie">
   <option value="${categorie.numero}">${categorie.libelle}</option>
 </c:forEach>

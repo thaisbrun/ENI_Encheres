@@ -32,7 +32,7 @@ public class ArticleVenduBLL {
 			articleVendu.setCategorie(categorie);
 			articleVendu.setUtilisateur(utilisateur);
 			this.dao.insert(articleVendu);
-				
+			
 		return articleVendu;
 	}
 
