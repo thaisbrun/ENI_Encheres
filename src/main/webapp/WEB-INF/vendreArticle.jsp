@@ -23,8 +23,8 @@
   </div>
   <div class="mb-3">
   <select class="form-select" aria-label="Default select example">
-<c:forEach items="${listeCategories}" var="categorie" name="categorie">
-  <option value="${categorie.numero }">${categorie.libelle}</option>
+<c:forEach items="${listeCategories}" var="categorie">
+  <option value="${categorie.numero}">${categorie.libelle}</option>
 </c:forEach>
 </select>
 </div>

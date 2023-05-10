@@ -14,8 +14,8 @@ public class ArticleVendu {
 	private int prix_vente;
 	private String etat_vente;
 	private String image;
-	private Utilisateur utilisateur;
 	private Categorie categorie;
+	private Utilisateur utilisateur;
 	
 	public ArticleVendu(int no_article, String nom_article, String description, Date date_debut_enchere,
 			Date date_fin_enchere, int prix_initial, int prix_vente, String etat_vente,
