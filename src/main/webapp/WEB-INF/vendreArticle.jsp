@@ -12,6 +12,7 @@
 <body>
 <div class="container">
 <br>
+<form name="venteform" method="post" action="vendreArticle">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Article</label>
     <input type="text" class="form-control"  name="nom_article" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -29,20 +30,35 @@
 </div>
 <div class="input-group mb-3">
   <label class="input-group-text" for="inputGroupFile01">Photo de l'article</label>
-  <input type="file" class="form-control" id="inputGroupFile01">
+  <input type="file" class="form-control" name="image" id="inputGroupFile01">
 </div>
+  <label class="form-label" for="exampleInputEmail1">Mise à prix</label>
+<input id="number" type="number" value="1" name="prix_initial">
+<br>
+<br>
+<label for="meeting-time" class="form-label">Date de début d'enchère </label>
+<input type="datetime-local" id="meeting-time" name="date_debut_enchere" min="DateTime.Now()" max="2023-08-24T00:00">
+<br>
+<br>
+<label for="meeting-time" class="form-label">Date de fin d'enchère </label>
+<input type="datetime-local" id="meeting-time" name="date_fin_enchere" min="2018-06-07T00:00" max="2023-08-24T00:00">
+<br>
+<br>
       <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Rue</label>
-    <input type="text" class="form-control"  name="rue" id="exampleInputEmail1" value="${utilisateur.rue }" aria-describedby="emailHelp">
+    <input type="text" class="form-control"  name="lieuRetrait" id="exampleInputEmail1" value="${user.rue }" aria-describedby="emailHelp">
   </div>
       <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Description</label>
-    <input type="text" class="form-control"  name="code_postal" id="exampleInputEmail1" value="${utilisateur.codePostal }" aria-describedby="emailHelp">
+    <label for="exampleInputEmail1" class="form-label">Code Postal</label>
+    <input type="text" class="form-control"  name="code_postal" id="exampleInputEmail1" value="${user.codePostal }" aria-describedby="emailHelp">
   </div>
       <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Ville</label>
-    <input type="text" class="form-control"  name="ville" id="exampleInputEmail1" value="${utilisateur.ville }" aria-describedby="emailHelp">
+    <input type="text" class="form-control"  name="ville" id="exampleInputEmail1" value="${user.ville }" aria-describedby="emailHelp">
   </div>
+<button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>
+      <button href="./" class="btn btn-warning">Annuler</button>
   </div>
 </body>
 </html>
