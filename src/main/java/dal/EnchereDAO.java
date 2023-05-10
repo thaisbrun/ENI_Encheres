@@ -11,5 +11,5 @@ public interface EnchereDAO{
 
 	public Enchere selectById(int no_utilisateur, int no_article);
 	
-	public List<Enchere> selectByCategorie(int no_categorie);
+	public List<Enchere> selectByCategorie(int no_categorie, String nom_article);
 }

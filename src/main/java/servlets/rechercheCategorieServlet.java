@@ -53,16 +53,15 @@ public class rechercheCategorieServlet extends HttpServlet {
 		request.setAttribute("listeCategories", listeCategories);
 		
         int categorie1 = Integer.parseInt(request.getParameter("categorie"));
-		
+        String nom_article = request.getParameter("nom_article");
 		List<Enchere> listeEncheres=null;
-		listeEncheres = enchereBLL.selectByCategorie(categorie1);
+		listeEncheres = enchereBLL.selectByCategorie(categorie1, nom_article);
 		request.setAttribute("listeEncheres", listeEncheres);
 		
 
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("/WEB-INF/rechercheCategorie.jsp").forward(request, response);
 	}
 
 	/**

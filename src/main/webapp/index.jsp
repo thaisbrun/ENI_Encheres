@@ -13,7 +13,7 @@
 <form name="rechercheCategorieForm" method="get" action="rechercheCategorie">
 <div class="col-6">
   <label for="exampleFormControlInput1" class="form-label">Filtres : </label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Le nom de l'article contient">
+  <input type="text" name="nom_article" class="form-control" id="exampleFormControlInput1" placeholder="Le nom de l'article contient">
   <br>
 <select name="categorie" class="form-select" aria-label="Default select example">
 <c:forEach items="${listeCategories}" var="categorie">
