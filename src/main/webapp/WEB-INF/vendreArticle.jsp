@@ -23,7 +23,7 @@
   </div>
   <div class="mb-3">
   <select class="form-select" aria-label="Default select example">
-<c:forEach items="${listeCategories}" var="categorie">
+<c:forEach items="${listeCategories}" var="categorie" name="categorie">
   <option value="${categorie.numero }">${categorie.libelle}</option>
 </c:forEach>
 </select>
@@ -46,7 +46,7 @@
 <br>
       <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Rue</label>
-    <input type="text" class="form-control"  name="lieuRetrait" id="exampleInputEmail1" value="${user.rue }" aria-describedby="emailHelp">
+    <input type="text" class="form-control"  name="rue" id="exampleInputEmail1" value="${user.rue }" aria-describedby="emailHelp">
   </div>
       <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Code Postal</label>
