@@ -44,7 +44,7 @@
               <p style="color:red; weight:bold; margin: auto;"><strong>${enchere.getMontant_enchere()} </strong> Pts</p>
             </div>
             <% if(session.getAttribute("user") != null) { %>
-            <form method="get" action="visuEnchere" name="afficherEnchereForm" >
+            <form method="get" action="voirEnchere" name="afficherEnchereForm" >
             	<input name="no_utilisateur" value="${enchere.getUtilisateur().getNo_utilisateur()}" type="hidden">
             	<input name="no_article" value="${enchere.getArticle().getNoArticle()}" type="hidden">
             	<input type="submit" style="width:100%; margin-top: 20px;" class="btn btn-info rounded-pill btn-block" value="Détails">

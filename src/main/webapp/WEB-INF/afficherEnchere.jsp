@@ -18,19 +18,19 @@
       				<div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-1.jpg" alt="" class="img-fluid card-img-top" style="display: block; max-width:100%; height: auto;"> 
     			</div>
     			<div class="col">
-      				<p>NomArticle</p>
-      				<p>NomVendeur</p>
-      				<p>DescriptionArticle</p>
+      				<p>${enchere.getArticle().getNomArticle() }</p>
+      				<p>${enchere.getUtilisateur().getPseudo() }</p>
+      				<p>${enchere.getArticle().getDescription() }</p>
       				<p>Catégorie</p>
       				
-      				<p>MiseAPrixEnchere</p>
-      				<p>MeilleurOffreEnchere</p>
+      				<p>${enchere.getArticle().getMiseAPrix() }</p>
+      				<p>${enchere.getMontant_enchere() }</p>
       				
-      				<p>AdresseRetrait<p>
-      				<p>DateDebutEnchere</p>
-      				<p>DateFinEnchere</p>
+      				<p>Adresse<p>
+      				<p>${enchere.getArticle().getDate_debut_enchere() }</p>
+      				<p>${enchere.getArticle().getDate_fin_enchere() }</p>
       				
-      				<p>EtatEnchere</p>
+      				<p>${enchere.getArticle().getEtatVente() }</p>
     			</div>
     		</div>
   		</div>

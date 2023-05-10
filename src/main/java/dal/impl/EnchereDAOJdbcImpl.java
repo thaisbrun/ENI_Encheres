@@ -18,8 +18,8 @@ import dal.EnchereDAO;
 import dal.UtilisateurDAO;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO{
-	private static final String SELECT_ALL = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON encheres.no_utilisateur=u.no_utilisateur; ";
-	//private static final String SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ?;";
+	private static final String SELECT_ALL = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON ENCHERES.no_utilisateur = u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON ENCHERES.no_article = a.no_article WHERE etat_vente= 'EC' OR etat_vente='CR';";
+	private static final String SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?;";
 	
 	UtilisateurDAO utilisateurDAO = new UtilisateurDAOJdbcImpl();
 	ArticleVenduDAO articleDAO = new ArticleVenduDAOJdbcImpl();
@@ -45,7 +45,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 		}
 		return listeEncheres;
 
-}
+	}
+	
 	private Enchere enchereBuilder(ResultSet rs) throws SQLException {
 		Enchere enchere;
 		System.out.println(rs.getInt("no_utilisateur"));
@@ -62,5 +63,27 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 		return enchere;
 		
 		
+	}
+
+	@Override
+	public Enchere selectById(int no_utilisateur, int no_article) {
+		Enchere enchere = new Enchere();
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_ID);
+			
+			ps.setInt(1, no_utilisateur);
+			ps.setInt(2, no_article);
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				enchere = enchereBuilder(rs);
+			}
+			rs.close();
+			ps.close();
+			cnx.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return enchere;
 	}
 }

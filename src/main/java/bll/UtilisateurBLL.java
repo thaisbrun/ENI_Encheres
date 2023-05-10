@@ -84,7 +84,15 @@ public class UtilisateurBLL {
 			this.dao.delete(utilisateur);
 			
 		return utilisateur;
-}
+	}
+	
+	public String formatAdresse(Utilisateur utilisateur) {
+		String rue = utilisateur.getRue();
+		String ville = utilisateur.getVille();	
+		String codePostal = utilisateur.getCodePostal();
+		
+		return rue + ", " + ville + " " + codePostal;
+	}
 	
 	//VERIFICATIONS
 	public void validationGeneral(Utilisateur utilisateur) throws BLLException {

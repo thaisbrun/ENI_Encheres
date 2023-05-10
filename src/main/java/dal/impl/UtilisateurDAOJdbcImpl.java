@@ -49,14 +49,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	@Override
 	public Utilisateur selectById(int no_utilisateur) {
 		Utilisateur utilisateur = null;
-		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
 			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_ID);
 			
-			// 3e etape : attribuer les parametres nécessaires à ma requête
 			ps.setInt(1, no_utilisateur);
-			// 4e etape : execution de la requete et interpretation des resultats
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				utilisateur = new Utilisateur();
