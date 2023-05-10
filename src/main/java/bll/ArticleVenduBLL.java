@@ -3,6 +3,7 @@ package bll;
 import java.util.Date;
 
 import bo.ArticleVendu;
+import bo.Categorie;
 import bo.Utilisateur;
 import dal.ArticleVenduDAO;
 import dal.DAOFactory;
@@ -18,7 +19,7 @@ public class ArticleVenduBLL {
 		return dao.selectById(id);
 	}
 	
-	public ArticleVendu ajouterArticleVendu(String nom_article,String description,Date date_debut_enchere,Date date_fin_enchere,Integer prix_initial, Categorie categorie, Utilisateur utilisateur) throws BLLException
+	public ArticleVendu ajouterArticleVendu(String nom_article,String description,Date date_debut_enchere,Date date_fin_enchere,Integer prix_initial, Utilisateur utilisateur, Categorie categorie) throws BLLException
 	{
 		
 		ArticleVendu articleVendu = null;

@@ -19,7 +19,7 @@ public class ArticleVendu {
 	
 	public ArticleVendu(int no_article, String nom_article, String description, Date date_debut_enchere,
 			Date date_fin_enchere, int prix_initial, int prix_vente, String etat_vente,
-			String image, Utilisateur utilisateur) {
+			String image, Categorie categorie, Utilisateur utilisateur) {
 		super();
 		this.no_article = no_article;
 		this.nom_article = nom_article;
@@ -30,6 +30,7 @@ public class ArticleVendu {
 		this.prix_vente = prix_vente;
 		this.etat_vente = etat_vente;
 		this.image = image;
+		this.categorie = categorie;
 		this.utilisateur = utilisateur;
 	}
 
