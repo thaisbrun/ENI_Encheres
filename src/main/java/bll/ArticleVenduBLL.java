@@ -35,5 +35,12 @@ public class ArticleVenduBLL {
 			
 		return articleVendu;
 	}
+	
+	//VERIFICATION
+	public void validationFaireEnchere(ArticleVendu article) throws BLLException{
+		if(!article.getEtatVente().equals("VD")) {
+			throw new BLLException("L'article à déja été vendu, vous ne pouvez donc pas enchérir");
+		}
+	}
 
 }

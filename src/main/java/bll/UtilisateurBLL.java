@@ -1,5 +1,6 @@
 package bll;
 
+import bo.Enchere;
 import bo.Utilisateur;
 import dal.DAOFactory;
 import dal.UtilisateurDAO;
@@ -74,7 +75,7 @@ public class UtilisateurBLL {
 			this.dao.update(utilisateur);
 			
 		return utilisateur;
-}
+	}
 
 	public Utilisateur SupprimerUtilisateur(int no_utilisateur)
 	{
@@ -84,6 +85,14 @@ public class UtilisateurBLL {
 			this.dao.delete(utilisateur);
 			
 		return utilisateur;
+	}
+	
+	public void utilisateurEncherie(Utilisateur utilisateur, int credit) {
+		
+	}
+	
+	public void utilisateurVend(Utilisateur utilisateur, int credit) {
+		
 	}
 	
 	public String formatAdresse(Utilisateur utilisateur) {
@@ -140,6 +149,15 @@ public class UtilisateurBLL {
 		System.out.println("2 " + resultEmail);
 		if(resultEmail != null) {
 			throw new BLLException("L'email est déja liée à un autre utilisateur");
+		}
+	}
+	
+	public void validationFaireEnchere(Utilisateur vendeur, Utilisateur utilisateurConnecete, Enchere enchere) throws BLLException{
+		if(utilisateurConnecete == vendeur) {
+			throw new BLLException("Vous ne pouvez pas enchérir sur un article que vous etes activement en train de vendre");
+		}
+		if(utilisateurConnecete.getCredit() > enchere.getMontant_enchere());{
+			throw new BLLException("Vous n'avez pas les crédits suffisants pour enchérir sur cette article");
 		}
 	}
 	
