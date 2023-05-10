@@ -1,34 +1,34 @@
 package bo;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class ArticleVendu {
 	
-	private int noArticle;
-	private String nomArticle;
+	private int no_article;
+	private String nom_article;
 	private String description;
-	private LocalDateTime dateDebutEncheres;
-	private LocalDateTime dateFinEncheres;
-	private double miseAPrix;
-	private double prixVente;
-	private String etatVente;
-	private Retrait lieuRetrait;
+	private Date date_debut_enchere;
+	private Date date_fin_enchere;
+	private int prix_initial;
+	private int prix_vente;
+	private String etat_vente;
 	private String image;
 	private Utilisateur utilisateur;
+	private Categorie categorie;
 	
-	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, double miseAPrix, double prixVente, String etatVente, Retrait lieuRetrait,
+	public ArticleVendu(int no_article, String nom_article, String description, Date date_debut_enchere,
+			Date date_fin_enchere, int prix_initial, int prix_vente, String etat_vente,
 			String image, Utilisateur utilisateur) {
 		super();
-		this.noArticle = noArticle;
-		this.nomArticle = nomArticle;
+		this.no_article = no_article;
+		this.nom_article = nom_article;
 		this.description = description;
-		this.dateDebutEncheres = dateDebutEncheres;
-		this.dateFinEncheres = dateFinEncheres;
-		this.miseAPrix = miseAPrix;
-		this.prixVente = prixVente;
-		this.etatVente = etatVente;
-		this.lieuRetrait = lieuRetrait;
+		this.date_debut_enchere = date_debut_enchere;
+		this.date_fin_enchere = date_fin_enchere;
+		this.prix_initial = prix_initial;
+		this.prix_vente = prix_vente;
+		this.etat_vente = etat_vente;
 		this.image = image;
 		this.utilisateur = utilisateur;
 	}
@@ -36,19 +36,19 @@ public class ArticleVendu {
 	public ArticleVendu() {}
 
 	public int getNoArticle() {
-		return noArticle;
+		return no_article;
 	}
 
-	public void setNoArticle(int noArticle) {
-		this.noArticle = noArticle;
+	public void setNoArticle(int no_article) {
+		this.no_article = no_article;
 	}
 
 	public String getNomArticle() {
-		return nomArticle;
+		return nom_article;
 	}
 
-	public void setNomArticle(String nomArticle) {
-		this.nomArticle = nomArticle;
+	public void setNomArticle(String nom_article) {
+		this.nom_article = nom_article;
 	}
 
 	public String getDescription() {
@@ -59,52 +59,44 @@ public class ArticleVendu {
 		this.description = description;
 	}
 
-	public LocalDateTime getDateDebutEncheres() {
-		return dateDebutEncheres;
+	public Date getDate_debut_enchere() {
+		return date_debut_enchere;
 	}
 
-	public void setDateDebutEncheres(LocalDateTime dateDebutEncheres) {
-		this.dateDebutEncheres = dateDebutEncheres;
+	public void setDate_debut_enchere(Date date_debut_enchere) {
+		this.date_debut_enchere = date_debut_enchere;
 	}
 
-	public LocalDateTime getDateFinEncheres() {
-		return dateFinEncheres;
+	public Date getDate_fin_enchere() {
+		return date_fin_enchere;
 	}
 
-	public void setDateFinEncheres(LocalDateTime dateFinEncheres) {
-		this.dateFinEncheres = dateFinEncheres;
+	public void setDate_fin_enchere(Date date_fin_enchere) {
+		this.date_fin_enchere = date_fin_enchere;
 	}
 
 	public double getMiseAPrix() {
-		return miseAPrix;
+		return prix_initial;
 	}
 
-	public void setMiseAPrix(double miseAPrix) {
-		this.miseAPrix = miseAPrix;
+	public void setMiseAPrix(int prix_initial) {
+		this.prix_initial = prix_initial;
 	}
 
 	public double getPrixVente() {
-		return prixVente;
+		return prix_vente;
 	}
 
-	public void setPrixVente(double prixVente) {
-		this.prixVente = prixVente;
+	public void setPrixVente(int prix_vente) {
+		this.prix_vente = prix_vente;
 	}
 
 	public String getEtatVente() {
-		return etatVente;
+		return etat_vente;
 	}
 
-	public void setEtatVente(String etatVente) {
-		this.etatVente = etatVente;
-	}
-
-	public Retrait getLieuRetrait() {
-		return lieuRetrait;
-	}
-
-	public void setLieuRetrait(Retrait lieuRetrait) {
-		this.lieuRetrait = lieuRetrait;
+	public void setEtatVente(String etat_vente) {
+		this.etat_vente = etat_vente;
 	}
 
 	public Utilisateur getUtilisateur() {
@@ -121,5 +113,13 @@ public class ArticleVendu {
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 }
