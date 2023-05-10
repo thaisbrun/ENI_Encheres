@@ -16,6 +16,7 @@
   <input type="text" name="nom_article" class="form-control" id="exampleFormControlInput1" placeholder="Le nom de l'article contient">
   <br>
 <select name="categorie" class="form-select" aria-label="Default select example">
+  <option value="0">Toutes</option>
 <c:forEach items="${listeCategories}" var="categorie">
   <option value="${categorie.numero }">${categorie.libelle}</option>
 </c:forEach>

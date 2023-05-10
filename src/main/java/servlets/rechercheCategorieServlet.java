@@ -55,7 +55,10 @@ public class rechercheCategorieServlet extends HttpServlet {
         int categorie1 = Integer.parseInt(request.getParameter("categorie"));
         String nom_article = request.getParameter("nom_article");
 		List<Enchere> listeEncheres=null;
-		listeEncheres = enchereBLL.selectByCategorie(categorie1, nom_article);
+		if (categorie1 == 0) {
+			listeEncheres = enchereBLL.selectAll();
+		}else {
+		listeEncheres = enchereBLL.selectByCategorie(categorie1, nom_article);}
 		request.setAttribute("listeEncheres", listeEncheres);
 		
 
