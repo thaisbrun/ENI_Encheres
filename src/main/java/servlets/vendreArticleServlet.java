@@ -85,10 +85,11 @@ public class vendreArticleServlet extends HttpServlet {
         //Utilisateur utilisateur = (Utilisateur) request.getParameter("")
         // do some processing here...
         Utilisateur utilisateur = ((Utilisateur) request.getSession().getAttribute("user"));
-        Categorie categorie = request.getParameter("categorie");
+        int categorie = Integer.parseInt(request.getParameter("categorie"));
         ArticleVenduBLL articleVenduBll = new ArticleVenduBLL();
+        System.out.println(categorie);
         try {
-        	articleVenduBll.ajouterArticleVendu(nom_article,description,date_debut_enchere,date_fin_enchere,prix_initial, utilisateur, categorie);
+        	articleVenduBll.ajouterArticleVendu(nom_article,description,date_debut_enchere,date_fin_enchere,prix_initial, utilisateur, new Categorie(categorie, ""));
 
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/afficherProfil.jsp");
 			rd.forward(request, response);
