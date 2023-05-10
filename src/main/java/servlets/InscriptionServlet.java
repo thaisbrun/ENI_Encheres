@@ -57,10 +57,9 @@ public class InscriptionServlet extends HttpServlet {
         String ville = request.getParameter("ville");
         String motDePasse = request.getParameter("motDePasse");
         //String motDePasse2 = request.getParameter("motDePasse2");
- 
-        // do some processing here...
       
         UtilisateurBLL utilisateurBll = new UtilisateurBLL();
+        
         try {
 			utilisateurBll.ajouterUtilisateur(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
 			//utilisateurBll.isMotDePasseValide(motDePasse, motDePasse2);
@@ -72,7 +71,6 @@ public class InscriptionServlet extends HttpServlet {
 			rd.forward(request, response);
 			
 		} catch (BLLException e) {
-			System.out.println(e.getMessage());
 			request.setAttribute("erreur", e.getMessage());
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");

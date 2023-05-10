@@ -48,7 +48,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	@Override
 	public Utilisateur selectById(int no_utilisateur) {
-		// TODO Auto-generated method stub
 		Utilisateur utilisateur = null;
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -62,6 +61,16 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			while (rs.next()) {
 				utilisateur = new Utilisateur();
 				utilisateur.setNo_utilisateur(no_utilisateur);
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setTelephone(rs.getString("telephone"));
+				utilisateur.setRue(rs.getString("rue"));
+				utilisateur.setCodePostal(rs.getString("code_postal"));
+				utilisateur.setVille(rs.getString("ville"));
+				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				
 			}
 			rs.close();
 			ps.close();
@@ -191,12 +200,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		// 1e etape : ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
 			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_LOGINONLY);
 			
-			// 3e etape : attribuer les parametres nécessaires à ma requête
 			ps.setString(1, pseudo);
-			// 4e etape : execution de la requete et interpretation des resultats
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				utilisateur = new Utilisateur();

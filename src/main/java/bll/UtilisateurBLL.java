@@ -1,7 +1,5 @@
 package bll;
 
-import java.util.List;
-
 import bo.Utilisateur;
 import dal.DAOFactory;
 import dal.UtilisateurDAO;
@@ -109,7 +107,7 @@ public class UtilisateurBLL {
 		if (utilisateur.getRue() == null || utilisateur.getRue().isBlank()) {
 			throw new BLLException("La rue ne peut pas être vide");
 		}
-		if (utilisateur.getCodePostal() == null || utilisateur.getCodePostal().isBlank()) {
+		if (utilisateur.getCodePostal() == null || utilisateur.getCodePostal().isBlank()){
 			throw new BLLException("Le code postal ne peut pas être vide");
 		}
 		if (utilisateur.getVille() == null || utilisateur.getVille().isBlank()) {
@@ -123,23 +121,17 @@ public class UtilisateurBLL {
 	}
 	
 	public void validationAjouterUtilisateur(Utilisateur utilisateur) throws BLLException{
-		List<Utilisateur> results = dao.selectAll();
-		System.out.println(results);
-		for(Utilisateur user : results) {
-			//System.out.println("validationAjoutUtilisateur [BDD] - Pseudo: " + user.getPseudo() + " / Email: " + user.getEmail());
-			//System.out.println("validationAjoutUtilisateur [USER] - Pseudo: " + utilisateur.getPseudo() + " / Email: " + utilisateur.getEmail());
-			
-			//Vérificatrion mdp1 & mdp2 sont égaux
-			Utilisateur resultLogin = selectByLoginOnly(utilisateur.getPseudo());
-			if(resultLogin != null) {
-			throw new BLLException("le pseudo est déja pris");
-			}
-			
-			//Utilisateur resultEmail = selectByEmailOnly(utilisateur.getEmail());
-			//System.out.println("2 " + resultEmail);
-			//if(resultEmail != null) {
-			//throw new BLLException("L'email est déja liée à un autre utilisateur");
-			//}
+		
+		Utilisateur resultLogin = selectByLoginOnly(utilisateur.getPseudo());
+		
+		if(resultLogin != null) {
+		throw new BLLException("le pseudo est déja pris");
+		}
+		
+		Utilisateur resultEmail = selectByEmailOnly(utilisateur.getEmail());
+		System.out.println("2 " + resultEmail);
+		if(resultEmail != null) {
+			throw new BLLException("L'email est déja liée à un autre utilisateur");
 		}
 	}
 	
@@ -152,8 +144,8 @@ public class UtilisateurBLL {
 	}
 	
 	public void isMotDePasseValide(String mp, String mp2 ) throws BLLException{
-		if(mp != mp2) {
-			throw new BLLException("Les 2 mots de passes sont différents");
+		if(mp != mp2 || mp2.isEmpty()) {
+			throw new BLLException("Vérifier que vous avez remplis le deuxieme mot de passe et qu'il correspond a votre mot de passe");
 		}
 	}
 }

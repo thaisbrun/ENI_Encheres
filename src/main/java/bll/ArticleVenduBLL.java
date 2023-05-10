@@ -11,7 +11,7 @@ public class ArticleVenduBLL {
 		dao = DAOFactory.getArticleVenduDAO();
 	}
 	
-	public ArticleVendu selectById(int id) {
-		return dao.selectById(id);
+	public ArticleVendu selectById(int no_artilce) {
+		return dao.selectById(no_artilce);
 	}
 }

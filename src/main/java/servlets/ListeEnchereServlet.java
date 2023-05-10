@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bll.EnchereBLL;
 import bo.Enchere;
+import bo.Utilisateur;
 import bll.CategorieBLL;
 import bo.Categorie;
 
@@ -34,6 +35,8 @@ public class ListeEnchereServlet extends HttpServlet {
 
 			//Recherche des enchères
 			Enchere enchere = new Enchere();
+			Utilisateur user = new Utilisateur();
+			
 			List<Enchere> listeEncheres=null;
 			listeEncheres = enchereBLL.selectAll();
 			request.setAttribute("listeEncheres", listeEncheres);

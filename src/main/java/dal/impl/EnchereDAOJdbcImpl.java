@@ -12,15 +12,17 @@ import bll.UtilisateurBLL;
 import bo.ArticleVendu;
 import bo.Enchere;
 import bo.Utilisateur;
+import dal.ArticleVenduDAO;
 import dal.ConnectionProvider;
 import dal.EnchereDAO;
+import dal.UtilisateurDAO;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO{
 	private static final String SELECT_ALL = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON encheres.no_utilisateur=u.no_utilisateur; ";
 	//private static final String SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ?;";
 	
-	private ArticleVenduBLL articleVenduBLL;
-	private UtilisateurBLL utilisateurBLL;
+	UtilisateurDAO utilisateurDAO = new UtilisateurDAOJdbcImpl();
+	ArticleVenduDAO articleDAO = new ArticleVenduDAOJdbcImpl();
 
 	@Override
 	public List<Enchere> selectAll() {
@@ -46,11 +48,19 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 }
 	private Enchere enchereBuilder(ResultSet rs) throws SQLException {
 		Enchere enchere;
+		System.out.println(rs.getInt("no_utilisateur"));
+		Utilisateur utilisateur = utilisateurDAO.selectById(rs.getInt("no_utilisateur"));
+		ArticleVendu article = articleDAO.selectById(rs.getInt("no_article"));
+		
 		enchere=new Enchere();
-		enchere.setNo_utilisateur(rs.getInt("no_utilisateur"));
-		enchere.setNo_Article(rs.getInt("no_article"));
+		enchere.setUtilisateur(utilisateur);
+		enchere.setArticle(article);
 		enchere.setDateEnchere(rs.getDate("date_enchere"));	
 		enchere.setMontant_enchere(rs.getDouble("montant_enchere"));
+		System.out.println(article);
+		
 		return enchere;
+		
+		
 	}
 }
