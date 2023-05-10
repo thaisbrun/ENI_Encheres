@@ -20,6 +20,11 @@ public class EnchereBLL {
 		return dao.selectAll();
 	}
 	
+
+	public List<Enchere> selectByCategorie(int no_categorie) {
+		return dao.selectByCategorie(no_categorie);
+	}
+	
 	public String getDateEnchereFormatedString(LocalDate date) {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("DD/MM/YY");
 		return date.format(dateTimeFormatter);

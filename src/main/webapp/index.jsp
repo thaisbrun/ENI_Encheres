@@ -10,19 +10,21 @@
 <br>
 <div class="container text-center">
 <div class="row align-items-center">
+<form name="rechercheCategorieForm" method="get" action="rechercheCategorie">
 <div class="col-6">
   <label for="exampleFormControlInput1" class="form-label">Filtres : </label>
   <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Le nom de l'article contient">
   <br>
-<select class="form-select" aria-label="Default select example">
+<select name="categorie" class="form-select" aria-label="Default select example">
 <c:forEach items="${listeCategories}" var="categorie">
   <option value="${categorie.numero }">${categorie.libelle}</option>
 </c:forEach>
 </select>
 </div>
 <div class="col-6">
-<button type="button" class="btn btn-primary btn-lg" style="margin-top:20px;">Rechercher</button>
+<button type="submit" class="btn btn-primary btn-lg" style="margin-top:20px;">Rechercher</button>
 </div>
+</form>
 </div>
 </div>
 <div class="container" style="margin-top:50px">

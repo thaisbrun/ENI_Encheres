@@ -19,6 +19,7 @@ import dal.UtilisateurDAO;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO{
 	private static final String SELECT_ALL = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON encheres.no_utilisateur=u.no_utilisateur; ";
+	private static final String SELECT_BY_CATEGORIE = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON encheres.no_utilisateur=u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON encheres.no_article = a.no_article WHERE no_categorie = ?;";
 	//private static final String SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ?;";
 	
 	UtilisateurDAO utilisateurDAO = new UtilisateurDAOJdbcImpl();
@@ -46,7 +47,34 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 		return listeEncheres;
 
 }
-	private Enchere enchereBuilder(ResultSet rs) throws SQLException {
+	@Override
+	public List<Enchere> selectByCategorie(int no_categorie) {
+		List<Enchere> listeEncheres = new ArrayList<Enchere>();
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_CATEGORIE);
+			// 3e etape : attribuer les parametres nécessaires à ma requête
+			pstmt.setInt(1, no_categorie);
+			
+			ResultSet rs = pstmt.executeQuery();
+			Enchere enchere=new Enchere();
+			while(rs.next())
+			{
+				enchere = enchereBuilder(rs);
+				listeEncheres.add(enchere);
+				
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return listeEncheres;
+
+}
+
+private Enchere enchereBuilder(ResultSet rs) throws SQLException {
+	
 		Enchere enchere;
 		System.out.println(rs.getInt("no_utilisateur"));
 		Utilisateur utilisateur = utilisateurDAO.selectById(rs.getInt("no_utilisateur"));
