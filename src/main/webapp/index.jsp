@@ -33,12 +33,11 @@
         <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-1.jpg" alt="" class="img-fluid card-img-top"> 
           <div class="p-4">
             <h5>${enchere.getArticle().getNomArticle() }</h5>
+            <p style=>Se termine le <strong>${enchere.getDateEnchere() }</strong></p>
+            <p><i class="bi bi-person-fill"></i>  ${enchere.getUtilisateur().getPseudo()}</p>
             <p class="small text-muted mb-0">${enchere.getArticle().getDescription() }</p>
-            <p>${enchere.getMontant_enchere() }</p>
-            <p>${enchere.getUtilisateur().getPseudo()}</p>
-            <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
             <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
-              <p style="color:red; weight:bold;">${enchere.getDateEnchere() }</p>
+              <p style="color:red; weight:bold; margin: auto;">&euro;${enchere.getMontant_enchere() }</p>
             </div>
           </div>
         </div>
