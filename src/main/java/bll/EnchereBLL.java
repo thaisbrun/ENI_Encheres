@@ -23,8 +23,8 @@ public class EnchereBLL {
 		return dao.selectById(no_utilisateur, no_article);
 	}
 
-	public List<Enchere> selectByCategorie(int no_categorie) {
-		return dao.selectByCategorie(no_categorie);
+	public List<Enchere> selectByCategorie(int no_categorie, String nom_article) {
+		return dao.selectByCategorie(no_categorie, nom_article);
 	}
 	
 	public String getDateEnchereFormatedString(LocalDate date) {

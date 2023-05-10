@@ -21,7 +21,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 
 	private static final String SELECT_ALL = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON ENCHERES.no_utilisateur = u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON ENCHERES.no_article = a.no_article WHERE etat_vente= 'EC' OR etat_vente='CR';";
 	private static final String SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?;";
-	private static final String SELECT_BY_CATEGORIE = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON encheres.no_utilisateur=u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON encheres.no_article = a.no_article WHERE no_categorie = ?;";
+	private static final String SELECT_BY_CATEGORIE = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON encheres.no_utilisateur=u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON encheres.no_article = a.no_article WHERE no_categorie = ? AND nom_article LIKE ?;";
+
 	//private static final String SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ?;";
 	
 	UtilisateurDAO utilisateurDAO = new UtilisateurDAOJdbcImpl();
@@ -50,13 +51,14 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	}
 	
 	@Override
-	public List<Enchere> selectByCategorie(int no_categorie) {
+	public List<Enchere> selectByCategorie(int no_categorie, String nom_article) {
 		List<Enchere> listeEncheres = new ArrayList<Enchere>();
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_CATEGORIE);
 			// 3e etape : attribuer les parametres nécessaires à ma requête
 			pstmt.setInt(1, no_categorie);
+			pstmt.setString(2, "%" + nom_article + "%");
 			
 			ResultSet rs = pstmt.executeQuery();
 			Enchere enchere=new Enchere();
@@ -77,7 +79,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 
 	private Enchere enchereBuilder(ResultSet rs) throws SQLException {
 		Enchere enchere;
-		System.out.println(rs.getInt("no_utilisateur"));
 		Utilisateur utilisateur = utilisateurDAO.selectById(rs.getInt("no_utilisateur"));
 		ArticleVendu article = articleDAO.selectById(rs.getInt("no_article"));
 		
