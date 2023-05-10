@@ -43,17 +43,12 @@
     		</div>
   		</div>
 	</form>
-	<% if(session.getAttribute("user") != null) { %>
+	<%if(session.getAttribute("user") != null) { %>
 	<form name="payerEnchere" method="post" action="voirEnchere">
 			<input name="no_utilisateur" value="${enchere.getUtilisateur().getNo_utilisateur()}" type="hidden">
 			<input name="no_article" value="${enchere.getArticle().getNoArticle() }" type="hidden">
 			<input name="user" value="${enchere.getArticle().getNoArticle() }" type="hidden">
 			<input type="submit" style="width:100%; margin-top: 20px;" class="btn btn-info rounded-pill btn-block" value="Enchérir">
 	</form>
-	<% }else if(){ %>
-	<form name="payerEnchere" method="post" action="voirEnchere">
-			<input type="submit" style="width:100%; margin-top: 20px;" class="btn btn-info rounded-pill btn-block" value="Modifier">
-	</form>
-	<%} %>
 </body>
 </html>
