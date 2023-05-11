@@ -19,7 +19,7 @@ import dal.UtilisateurDAO;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO{
 
-	private static final String SELECT_ALL = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON ENCHERES.no_utilisateur = u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON ENCHERES.no_article = a.no_article WHERE etat_vente= 'EC' OR etat_vente='CR';";
+	private static final String SELECT_ALL = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON ENCHERES.no_utilisateur = u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON ENCHERES.no_article = a.no_article;";
 	private static final String SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?;";
 	private static final String SELECT_BY_CATEGORIE = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON encheres.no_utilisateur=u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON encheres.no_article = a.no_article WHERE no_categorie = ? AND nom_article LIKE ?;";
 
@@ -87,7 +87,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 		enchere.setArticle(article);
 		enchere.setDateEnchere(rs.getDate("date_enchere"));	
 		enchere.setMontant_enchere(rs.getDouble("montant_enchere"));
-		System.out.println(article);
+		System.out.println("Article:" + article + " - article.utilisateur: " + utilisateur);
 		
 		return enchere;
 	}

@@ -153,12 +153,26 @@ public class UtilisateurBLL {
 	}
 	
 	public void validationFaireEnchere(Utilisateur vendeur, Utilisateur utilisateurConnecete, Enchere enchere) throws BLLException{
-		if(utilisateurConnecete == vendeur) {
+		if(!estVendeur(vendeur, utilisateurConnecete)) {
 			throw new BLLException("Vous ne pouvez pas enchérir sur un article que vous etes activement en train de vendre");
 		}
 		if(utilisateurConnecete.getCredit() > enchere.getMontant_enchere());{
 			throw new BLLException("Vous n'avez pas les crédits suffisants pour enchérir sur cette article");
 		}
+	}
+	
+	public void validationModifEnchere(Utilisateur vendeur, Utilisateur utilisateurConnecete) throws BLLException{
+		if(estVendeur(vendeur, utilisateurConnecete)) {
+			throw new BLLException("Vous ne pouvez pas modifier une enchere dont vous n'etes pas le vendeur");
+		}
+	}
+	
+	public boolean estVendeur(Utilisateur vendeur, Utilisateur utilisateurConnecete) {
+		boolean estVendeur = false;
+		if(utilisateurConnecete == vendeur) {
+			estVendeur = true;
+		}
+		return estVendeur;
 	}
 	
 	public Boolean isAlphanumerique(String str) {

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="container text-center" style="margin-top:25px">
-		<h2>Détails de nomArticle</h2>
+		<h2>Détails de l'enchere</h2>
 	</div>
 	<c:choose>
   	<c:when test="${not empty erreur }">
@@ -26,6 +26,7 @@
       				<div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-1.jpg" alt="" class="img-fluid card-img-top" style="display: block; max-width:100%; height: auto;"> 
     			</div>
     			<div class="col">
+    				<p>${enchere.getUtilisateur().getNo_utilisateur()}</p>
       				<p>${enchere.getArticle().getNomArticle() }</p>
       				<p>${enchere.getUtilisateur().getPseudo() }</p>
       				<p>${enchere.getArticle().getDescription() }</p>
@@ -44,11 +45,12 @@
   		</div>
 	</form>
 	<%if(session.getAttribute("user") != null) { %>
-	<form name="payerEnchere" method="post" action="voirEnchere">
+		<form name="payerEnchere" method="post" action="voirEnchere">
 			<input name="no_utilisateur" value="${enchere.getUtilisateur().getNo_utilisateur()}" type="hidden">
 			<input name="no_article" value="${enchere.getArticle().getNoArticle() }" type="hidden">
 			<input name="user" value="${enchere.getArticle().getNoArticle() }" type="hidden">
-			<input type="submit" style="width:100%; margin-top: 20px;" class="btn btn-info rounded-pill btn-block" value="Enchérir">
-	</form>
+			<input type="submit" style="width:100%; margin-top: 20px;margin-bottom: 50px;" class="btn btn-info rounded-pill btn-block" value="Edition">
+		</form>
+	<%}%>
 </body>
 </html>

@@ -37,9 +37,13 @@ public class ArticleVenduBLL {
 	}
 	
 	//VERIFICATION
-	public void validationFaireEnchere(ArticleVendu article) throws BLLException{
+	public void validationEnchere(ArticleVendu article) throws BLLException{
+		Date now = new Date();
 		if(!article.getEtatVente().equals("VD")) {
-			throw new BLLException("L'article à déja été vendu, vous ne pouvez donc pas enchérir");
+			throw new BLLException("L'article à déja été vendu, vous ne pouvez donc ni enchérir, ni éditer l'article");
+		}
+		if(article.getDate_debut_enchere().before(now)) {
+			throw new BLLException("L'enchere est déja en cours, vous ne pouvez donc plus la modifier");
 		}
 	}
 

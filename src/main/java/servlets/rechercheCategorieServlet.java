@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bll.ArticleVenduBLL;
 import bll.CategorieBLL;
 import bll.EnchereBLL;
-import bll.UtilisateurBLL;
 import bo.Categorie;
 import bo.Enchere;
 import bo.Utilisateur;

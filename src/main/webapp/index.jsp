@@ -92,7 +92,14 @@
            </form>
             <p class="small text-muted mb-0">${enchere.getArticle().getDescription() }</p>
             <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
-              <p style="color:red; weight:bold; margin: auto;"><strong>${enchere.getMontant_enchere()} </strong> Pts</p>
+            <c:choose>
+            	<c:when test="${enchere.getArticle().getEtatVente().equals('VD')}">
+            		<p style="color:red; weight:bold; margin: auto;"><strong>Vendu</strong></p>
+            	</c:when>
+            	<c:otherwise>
+            		<p style="color:red; weight:bold; margin: auto;"><strong>${enchere.getMontant_enchere()} </strong> Pts</p>
+            	</c:otherwise>
+            </c:choose>
             </div>
             <% if(session.getAttribute("user") != null) { %>
             <form method="get" action="voirEnchere" name="afficherEnchereForm" >
