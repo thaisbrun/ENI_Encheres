@@ -2,6 +2,7 @@ package bo;
 
 public class Utilisateur {
 	
+	//Propriétés
 	private int no_utilisateur;
 	private String pseudo;
 	private String nom;
@@ -15,6 +16,7 @@ public class Utilisateur {
 	private int credit;
 	private boolean administrateur;
 	
+	//Constructeur
 	public Utilisateur(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		super();
@@ -34,6 +36,7 @@ public class Utilisateur {
 	
 	public Utilisateur() {}
 
+	//Accesseurs
 	public int getNo_utilisateur() {
 		return no_utilisateur;
 	}
@@ -53,6 +56,7 @@ public class Utilisateur {
 	public String getNom() {
 		return nom;
 	}
+	
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
@@ -129,6 +133,4 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 
-	
-	
 }

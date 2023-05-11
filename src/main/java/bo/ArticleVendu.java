@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class ArticleVendu {
 	
+	//Propriétés 
 	private int no_article;
 	private String nom_article;
 	private String description;
@@ -16,6 +17,7 @@ public class ArticleVendu {
 	private Categorie categorie;
 	private Utilisateur utilisateur;
 	
+	//Constructeur
 	public ArticleVendu(int no_article, String nom_article, String description, Date date_debut_enchere,
 			Date date_fin_enchere, int prix_initial, int prix_vente, String etat_vente,
 			String image, Categorie categorie, Utilisateur utilisateur) {
@@ -34,7 +36,8 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu() {}
-
+	
+	//Accesseurs
 	public int getNoArticle() {
 		return no_article;
 	}

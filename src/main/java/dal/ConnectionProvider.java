@@ -9,8 +9,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 /*
- * Role : mettre a disposition une connexion vers la 
- * base de données
+ * Mettre a disposition une connexion vers la base de données
  */
 public abstract class ConnectionProvider {
 	private static DataSource ds;

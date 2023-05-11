@@ -15,6 +15,7 @@ import dal.UtilisateurDAO;
  * Implémentation des méthodes proposées par UtilisateurDAO
  */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
+	//Requêtes SQL
 	private static final String SELECT_ALL = "SELECT pseudo, email FROM utilisateurs;";
 	private static final String SELECT_BY_EMAILONLY= "SELECT * FROM utilisateurs WHERE email = ?;";
 	private static final String SELECT_BY_LOGINONLY = "SELECT * FROM utilisateurs WHERE pseudo = ?;";
@@ -28,15 +29,19 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	//@Override
 	public List<Utilisateur> selectAll() {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<>();
+		//Connexion à la BDD
 		try (Connection cnx = ConnectionProvider.getConnection();) {
+			//Préparation de la requête
 			PreparedStatement ps = cnx.prepareStatement(SELECT_ALL);
 			Utilisateur utilisateur = new Utilisateur();
 			
 				String pseudo = utilisateur.getPseudo();
 				String email = utilisateur.getEmail();
 				
+				//ajout de chaque objet à la liste
 				listeUtilisateurs.add(utilisateur);
 				
+			//Exécution de la requête
 			ResultSet rs = ps.executeQuery();
 			rs.close();
 			ps.close();
@@ -50,11 +55,16 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	@Override
 	public Utilisateur selectById(int no_utilisateur) {
 		Utilisateur utilisateur = null;
+		//Connexion à la BDD
 		try (Connection cnx = ConnectionProvider.getConnection();) {
+			//Préparation de la requête
 			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_ID);
 			
 			ps.setInt(1, no_utilisateur);
+			
+			//Exécution des résultats
 			ResultSet rs = ps.executeQuery();
+			//
 			while (rs.next()) {
 				utilisateur = new Utilisateur();
 				utilisateur.setNo_utilisateur(no_utilisateur);
@@ -80,11 +90,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	@Override
 	public void insert(Utilisateur utilisateur) {
-		// 1e etape : ouvrir la connexion a la bdd
+		// Connexion à la BDD
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
+			// Préparation de la requête
 			PreparedStatement ps = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			// 4e etape : execution de la requete et interpretation des resultats
+			// Exécution de la requête
 
 			ps.setString(1, utilisateur.getPseudo());
 			ps.setString(2, utilisateur.getNom());
@@ -97,6 +107,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			ps.setString(9, utilisateur.getMotDePasse());
 			
 			ps.executeUpdate();
+			//Générer la clé primaire
 			ResultSet rs = ps.getGeneratedKeys();
 			if(rs.next())
 			{
@@ -113,11 +124,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public void update(Utilisateur utilisateur) {
-		// 1e etape : ouvrir la connexion a la bdd
+		// Connexion à la BDD
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
+			//Préparation de la requete SQL 
 			PreparedStatement ps = cnx.prepareStatement(UPDATE);
-			// 4e etape : execution de la requete et interpretation des resultats
+			// Execution de la requete et interpretation des resultats
 			
 			ps.setString(1, utilisateur.getPseudo());
 			ps.setString(2, utilisateur.getNom());
@@ -139,11 +150,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public void delete(Utilisateur utilisateur) {
-		// 1e etape : ouvrir la connexion a la bdd
+		// Connexion a la BDD
 				try (Connection cnx = ConnectionProvider.getConnection();) {
-					// 2e etape : preparer la requete SQL qu'on souhaite executer
+					// Preparer la requete SQL qu'on souhaite executer
 					PreparedStatement ps = cnx.prepareStatement(DELETE);
-					// 4e etape : execution de la requete et interpretation des resultats
+					// Execution de la requete et interpretation des resultats
 
 					ps.setInt(1, utilisateur.getNo_utilisateur());
 					
@@ -157,15 +168,15 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	public Utilisateur connexionByLogin(String pseudo, String motDePasse) {
 		Utilisateur utilisateur = null;
-		// 1e etape : ouvrir la connexion a la bdd
+		// Connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
+			// Preparer la requete SQL qu'on souhaite executer
 			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_LOGIN);
 			
-			// 3e etape : attribuer les parametres nécessaires à ma requête
+			// Attribuer les parametres nécessaires à ma requête
 			ps.setString(1, pseudo);
 			ps.setString(2, motDePasse);
-			// 4e etape : execution de la requete et interpretation des resultats
+			// Execution de la requete et interpretation des resultats
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				utilisateur = new Utilisateur();	
@@ -194,12 +205,13 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	@Override
 	public Utilisateur selectByLoginOnly(String pseudo) {
 		Utilisateur utilisateur = null;
-		// 1e etape : ouvrir la connexion a la bdd
+		// Ouvrir la connexion a la bdd
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			
+			//Préparation de la requête
 			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_LOGINONLY);
 			
 			ps.setString(1, pseudo);
+			//Exécution de la requete 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				utilisateur = new Utilisateur();
@@ -228,11 +240,13 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	public Utilisateur selectByEmailOnly(String email) {
 		Utilisateur utilisateur = null;
+		//Ouverture connexion BDD
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			
+			//Préparation de la requete 
 			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_EMAILONLY);
 			
 			ps.setString(1, email);
+			//Exécution de la requete 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				utilisateur = new Utilisateur();
@@ -257,36 +271,4 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return utilisateur;
 	}
-
-	/*@Override
-	public void insert(Repas repas) {
-		// 1e etape : ouvrir la connexion a la bdd
-		try (Connection cnx = ConnectionProvider.getConnection();) {
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
-			PreparedStatement ps =
-					cnx.prepareStatement(INSERT,
-										PreparedStatement.RETURN_GENERATED_KEYS);
-			
-			// 3e etape : attribuer les parametres nécessaires à ma requête
-			ps.setDate(1, Date.valueOf(repas.getDate()));
-			ps.setTime(2, Time.valueOf(repas.getHeure()));
-			
-			// 4e etape : execution de la requete et interpretation des resultats
-			ps.executeUpdate();
-			ResultSet rs = ps.getGeneratedKeys();
-			if (rs.next()) {
-				int id = rs.getInt(1);
-				repas.setId(id);
-			}
-			
-			for (Aliment current : repas.getAliments()) {
-				PreparedStatement ps2 = cnx.prepareStatement(INSERT_ALIMENT);
-				ps2.setString(1, current.getNom());
-				ps2.setInt(2, repas.getId());
-				ps2.executeUpdate();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
 }

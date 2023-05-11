@@ -5,13 +5,13 @@
 
 <!DOCTYPE html>
 <html>
-<body>
-	<h1>Bienvenue</h1>
-<br>
+<body style="background-color:#B6DFF6;">
 <div class="container">
 <div class="row align-items-center">
+<h1> Bienvenue !</h1>
+<h3>Site de vente et d'enchères</h3>
 <form name="rechercheCategorieForm" method="get" action="rechercheCategorie">
-<div class="col-6">
+<div class="col">
   <label for="exampleFormControlInput1" class="form-label">Filtres : </label>
   <input type="text" name="nom_article" class="form-control" id="exampleFormControlInput1" placeholder="Le nom de l'article contient">
   <br>
@@ -19,7 +19,6 @@
   <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
   <label class="form-check-label" for="inlineRadio1">Achats</label>
-</div>
 <div class="form-check">
   <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
   <label class="form-check-label" for="defaultCheck1">
@@ -38,11 +37,11 @@
     Mes enchères ouvertes
   </label>
 </div>
-
+</div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
   <label class="form-check-label" for="inlineRadio2">Mes ventes</label>
-</div>
+
 <div class="form-check">
   <input class="form-check-input" type="checkbox" name="ventesEnCours" id="defaultCheck1">
   <label class="form-check-label" for="defaultCheck1">
@@ -55,14 +54,17 @@
     Mes ventes non débutées 
   </label>
 </div>
-
 <div class="form-check">
   <input class="form-check-input" type="checkbox" name="ventesTerminees" id="defaultCheck1">
   <label class="form-check-label" for="defaultCheck1">
     Mes ventes terminées
   </label>
 </div>
+</div>
 <% } %>
+<br>
+<br>
+  <label for="form-select" class="form-label">Catégories : </label>
 <select name="categorie" class="form-select" aria-label="Default select example">
   <option value="0">Toutes</option>
 <c:forEach items="${listeCategories}" var="categorie">
@@ -70,21 +72,20 @@
 </c:forEach>
 </select>
 </div>
-<div class="col-6">
+<div class="col">
 <button type="submit" class="btn btn-primary btn-lg" style="margin-top:20px;">Rechercher</button>
 </div>
 </form>
 </div>
 </div>
 <div class="container" style="margin-top:50px">
-
 <div class="row">
 	<c:forEach items="${listeEncheres}" var="enchere">
 	<div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-        <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-1.jpg" alt="" class="img-fluid card-img-top"> 
+        <div class="bg-white rounded shadow-sm"><img src="./img/image.jpg" alt="" class="img-fluid card-img-top"> 
           <div class="p-4">
             <h5>${enchere.getArticle().getNomArticle() }</h5>
-            <p style=>Se termine le <strong>${enchere.getDateEnchere() }</strong></p>
+            <p style=>Se termine le <strong>${enchere.getArticle().getDate_fin_enchere() }</strong></p>
             <form name="afficherUtilisateurForm" method="get" action="afficherUtilisateur">
            <input name="no_utilisateur" value="${enchere.getUtilisateur().getNo_utilisateur()}" style="display:none;">
            <button type="submit" class="btn btn-link"value="${enchere.getUtilisateur().getPseudo()}"><i class="bi bi-person-fill"></i>

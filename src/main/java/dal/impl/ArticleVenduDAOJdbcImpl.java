@@ -17,7 +17,12 @@ import dal.CategorieDAO;
 import dal.ConnectionProvider;
 import dal.UtilisateurDAO;
 
+/*
+ * Implémentation des méthodes proposées par ArticleVenduDAO
+ */
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
+	
+	//Requêtes SQL
 	private static final String SELECT_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?;";
 	private static final String INSERT = "INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_enchere,date_fin_enchere,prix_initial,prix_vente,no_utilisateur,no_categorie,etat_vente,image) VALUES(?,?,?,?,?,null,?,?,'CR',?)";
 	private static final String UPDATE ="UPDATE ARTICLES_VENDUS SET nom_article = ?, description=?, date_debut_enchere=?, date_fin_enchere=? , prix_initial=? WHERE no_article = ?;";
@@ -27,11 +32,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
 	@Override
 	public void insert(ArticleVendu articleVendu) {
-		// 1e etape : ouvrir la connexion a la bdd
+		// Ouverture de la connexion à la BDD
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			// 2e etape : preparer la requete SQL qu'on souhaite executer
+			// Préparation de la requête
 			PreparedStatement ps = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			// 4e etape : execution de la requete et interpretation des resultats
+			// Execution de la requête et interpretation des résultats
 			ps.setString(1, articleVendu.getNomArticle());
 			ps.setString(2, articleVendu.getDescription());
 			ps.setDate(3, new java.sql.Date(articleVendu.getDate_debut_enchere().getTime()));
@@ -40,8 +45,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			ps.setObject(6, articleVendu.getUtilisateur().getNo_utilisateur());
 			ps.setObject(7, articleVendu.getCategorie().getNumero());
 			ps.setString(8, articleVendu.getImage());
-			
 			ps.executeUpdate();
+			//On génère une clé primaire 
 			ResultSet rs = ps.getGeneratedKeys();
 			if(rs.next())
 			{
@@ -55,14 +60,15 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			e.printStackTrace();
 		}
 	}
-
 	@Override
 	public ArticleVendu selectById(int noArticle) {
 
 		ArticleVendu resultat = null;
+		// On ouvre la connexion à la BDD
 		try (Connection cnx = ConnectionProvider.getConnection();) {
+			// Préparation de la requête
 			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_ID);
-			
+			// Execution de la requête et interpretation des résultats
 			ps.setInt(1, noArticle);
 			
 			ResultSet rs = ps.executeQuery();

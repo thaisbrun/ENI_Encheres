@@ -14,7 +14,8 @@ import bll.UtilisateurBLL;
 import bo.Utilisateur;
 
 /**
- * Servlet implementation class supprimerProfil
+ * Servlet servant à supprimer le profil. 
+ * Page associée : supprimerProfil.jsp
  */
 @WebServlet("/supprimerProfil")
 public class supprimerProfilServlet extends HttpServlet {
@@ -32,10 +33,10 @@ public class supprimerProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Récupérer l'utilisateur
 	    Utilisateur utilisateur = new Utilisateur();
 	    request.setAttribute("utilisateur", utilisateur);
-
+//Lien vers la JSP
 		request.getRequestDispatcher("/WEB-INF/supprimerProfil.jsp").forward(request, response);
 	}
 
@@ -43,15 +44,18 @@ public class supprimerProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// read form fields
+		// Pour supprimer un utilisateur, j'ai besoin de l'id
         int no_utilisateur = ((Utilisateur) request.getSession().getAttribute("user")).getNo_utilisateur();
  
-        // do some processing here...
+        // On appelle la classe BLL
       
         UtilisateurBLL utilisateurBll = new UtilisateurBLL();
+        
+        //Appel de la requête SQL 
+        
 		utilisateurBll.SupprimerUtilisateur(no_utilisateur);
-					
+		
+		//On récupère la session et on la détruit
 		HttpSession session = request.getSession();
 			session.invalidate();
 		

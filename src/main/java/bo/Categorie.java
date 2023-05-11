@@ -2,9 +2,11 @@ package bo;
 
 public class Categorie {
 	
+	//Propriétés
 	private int numero;	
 	private String libelle;
 	
+	//Constructeur
 	public Categorie() {
 	}
 
@@ -14,6 +16,7 @@ public class Categorie {
 		this.libelle = libelle;
 	}
 	
+	//Accesseurs
 	public int getNumero() {
 		return numero;
 	}

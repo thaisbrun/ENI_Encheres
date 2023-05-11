@@ -4,6 +4,9 @@ import java.util.List;
 
 import bo.Enchere;
 
+/*
+ * Définition des méthodes utilisées auprès de la BDD
+ */
 
 public interface EnchereDAO{
 	

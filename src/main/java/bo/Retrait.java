@@ -2,10 +2,12 @@ package bo;
 
 public class Retrait {
 
+	//Propriétés
 	private String rue;
 	private int code_postal;
 	private String ville;
 	
+	//Constructeur
 	public Retrait(String rue, int code_postal, String ville) {
 		super();
 		this.rue = rue;
@@ -15,6 +17,7 @@ public class Retrait {
 	
 	public Retrait() {}
 
+	//Accesseurs
 	public String getRue() {
 		return rue;
 	}

@@ -4,11 +4,13 @@ import java.sql.Date;
 
 public class Enchere {
 	
+	//Propriétés
 	private Utilisateur utilisateur;
 	private ArticleVendu article;
 	private Date date_enchere;
 	private double montant_enchere;
 	
+	//Constructeur
 	public Enchere(Utilisateur no_utilisateur, int articleVendu, Date date_enchere,
 			double montant_enchere, ArticleVendu no_article) {
 		super();
@@ -20,6 +22,7 @@ public class Enchere {
 
 	public Enchere() {}
 
+	//Accesseurs
 	public Date getDateEnchere() {
 		return date_enchere;
 	}

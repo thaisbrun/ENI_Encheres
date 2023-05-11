@@ -17,7 +17,8 @@ import bll.UtilisateurBLL;
 import bo.Utilisateur;
 
 /**
- * Servlet implementation class Connexion
+ * Servlet servant à gérer la connexion d'un utilisateur. 
+ * Page associée : connexion.jsp
  */
 @WebServlet("/connexion")
 public class ConnexionServlet extends HttpServlet {
@@ -38,8 +39,9 @@ public class ConnexionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//Chemin vers la JSP
 		request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
 
 	}
@@ -50,13 +52,18 @@ public class ConnexionServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Pour se connecter, je récupère les paramètres fournis par l'utilisateur
 		
         String pseudo = request.getParameter("pseudo");
         String motDePasse = request.getParameter("motDePasse");
-
         	
         	UtilisateurBLL utilisateurBll = new UtilisateurBLL();
+        	
+        	//Utilisation d'une requête SQL : on va voir si les informations fournies sont correctes et valides dans la BDD
+        	
     		Utilisateur u = utilisateurBll.connexionByLogin(pseudo,motDePasse);
+    		
+    		//Si les informations sont erronées : la page d'erreur s'affiche
     		
     		if(u ==(null))
     		{
@@ -65,7 +72,7 @@ public class ConnexionServlet extends HttpServlet {
     			
     		}  
     		else{
-    			//SI pas nul : on charge en session et on redirige vers l'accueil
+    			//Si les infos sont justes : on charge en session et on redirige vers l'accueil
     		HttpSession session = request.getSession();
     		session.setAttribute("user",u);
     		System.out.println(u.getPrenom());

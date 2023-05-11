@@ -17,7 +17,8 @@ import bll.CategorieBLL;
 import bo.Categorie;
 
 /**
- * Servlet implementation class ListeEnchereServlet
+ * Servlet servant à afficher la liste des enchères. 
+ * Page associée : index.jsp
  */
 @WebServlet("")
 public class ListeEnchereServlet extends HttpServlet {
@@ -33,19 +34,27 @@ public class ListeEnchereServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-			//Recherche des enchères
+			//Initialisation des classes
 			Enchere enchere = new Enchere();
 			Utilisateur user = new Utilisateur();
 			
+			//Création de la liste des enchères 
 			List<Enchere> listeEncheres=null;
+			//Appel à la requête SQL
 			listeEncheres = enchereBLL.selectAll();
 			request.setAttribute("listeEncheres", listeEncheres);
 			
+			//Initialisation de la classe 
 			Categorie categorie = new Categorie();
+			
+			//Création de la liste des catégories
 			List<Categorie> listeCategories = null;
+			
+			//Création de la liste des catégories
 			listeCategories = categorieBLL.selectAll();
 			request.setAttribute("listeCategories", listeCategories);
 
+			//Lien vers la JSP
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

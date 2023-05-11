@@ -5,38 +5,33 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Afficher un profil</title>
+<title>Mon profil</title>
 </head>
-<body>
+<body style="background-color:#B6DFF6;">
 </br>
-
 <div class="container text-center">
+<h1>Mes informations de profil</h1>
+<br>
 <div class="mb-3">
-    <p>Pseudo : ${user.pseudo }</p>
+    <p><i>Mon pseudo :</i> ${user.pseudo }</p>
 </div>
-
 <div class="mb-3">
-    <p>Nom : ${user.nom }</p>
+    <p><i>Mon nom :</i> ${user.nom }</p>
  </div>
 
 <div class="mb-3">
-    <p>Prénom : ${user.prenom}</p>
+    <p><i>Mon prénom :</i> ${user.prenom}</p>
 </div>
 <div class="mb-3">
-    <p>Email : ${user.email}</p>
+    <p><i>Mon email :</i> ${user.email}</p>
 </div>
 <div class="mb-3">
-    <p>Telephone : ${user.telephone}</p>
+    <p><i>Mon numéro de téléphone :</i> ${user.telephone}</p>
 </div>
 <div class="mb-3">
-    <p>Rue : ${user.rue}</p>
+    <p><i>Mon adresse :</i> ${user.rue} ${user.ville} ${user.codePostal}</p>
 </div>
-<div class="mb-3">
-    <p>Code Postal : ${user.codePostal}</p>
-</div>
-<div class="mb-3">
-    <p>Ville : ${user.ville}</p>
-</div>
+<br>
 <a href="./modifierProfil" class="btn btn-primary">Modifier mon profil</a>
 </div>
 </body>

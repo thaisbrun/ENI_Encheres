@@ -13,7 +13,8 @@ import bll.BLLException;
 import bll.UtilisateurBLL;
 
 /**
- * Servlet implementation class Connexion
+ * Servlet servant à créer un utilisateur (inscription à la plateforme). 
+ * Page associée : inscription.jsp
  */
 @WebServlet("/inscription")
 public class InscriptionServlet extends HttpServlet {
@@ -36,6 +37,7 @@ public class InscriptionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//Lien vers la JSP
 		request.getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
 
 	}
@@ -45,7 +47,7 @@ public class InscriptionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 // read form fields
+		 // Je récupère grâce au formulaire les informations demandées
 		
         String pseudo = request.getParameter("pseudo");
         String nom = request.getParameter("nom");
@@ -56,21 +58,19 @@ public class InscriptionServlet extends HttpServlet {
         String codePostal = request.getParameter("codePostal");   
         String ville = request.getParameter("ville");
         String motDePasse = request.getParameter("motDePasse");
-        //String motDePasse2 = request.getParameter("motDePasse2");
       
         UtilisateurBLL utilisateurBll = new UtilisateurBLL();
         
         try {
+        	//Appel de la requête SQL : ajout de l'utilisateur en fonction des informations transmises
 			utilisateurBll.ajouterUtilisateur(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
-			//utilisateurBll.isMotDePasseValide(motDePasse, motDePasse2);
 			
-			//System.out.println("motDePasse: " + motDePasse);
-			//System.out.println("motDePasse2: " + motDePasse2);
-
+			//Lien vers la JSP
 			RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
 			rd.forward(request, response);
 			
 		} catch (BLLException e) {
+			//Envoie vers message d'erreur si les infos sont erronées
 			request.setAttribute("erreur", e.getMessage());
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");

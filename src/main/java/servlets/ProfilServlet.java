@@ -14,7 +14,8 @@ import bll.UtilisateurBLL;
 import bo.Utilisateur;
 
 /**
- * Servlet implementation class ProfilServlet
+ * Servlet servant à afficher son profil. 
+ * Page associée : afficherProfil.jsp
  */
 @WebServlet("/afficherProfil")
 public class ProfilServlet extends HttpServlet {
@@ -32,10 +33,8 @@ public class ProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* HttpSession session = request.getSession();
-		System.out.print (request.getSession().getId());
-		Utilisateur u = (Utilisateur) session.getAttribute("user"); */
-
+		
+		//Lien vers la JSP
 		request.getRequestDispatcher("/WEB-INF/afficherProfil.jsp").forward(request, response);
 	}
 

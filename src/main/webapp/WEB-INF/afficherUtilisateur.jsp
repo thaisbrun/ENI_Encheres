@@ -5,35 +5,38 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Profil de ${utilisateur.nom}</title>
+<title>Profil de ${utilisateur.pseudo}</title>
 </head>
-<body>
+<body style="background-color:#B6DFF6;">
+<br>
 <div class="container text-center">
+<h1>Informations de profil</h1>
+<br>
 <div class="mb-3">
-    <p>Pseudo : ${utilisateur.pseudo }</p>
+    <p><i>Pseudo : </i>${utilisateur.pseudo }</p>
 </div>
 
 <div class="mb-3">
-    <p>Nom : ${utilisateur.nom }</p>
+    <p><i>Nom : </i>${utilisateur.nom }</p>
  </div>
 
 <div class="mb-3">
-    <p>Prénom : ${utilisateur.prenom}</p>
+    <p><i>Prénom : </i>${utilisateur.prenom}</p>
 </div>
 <div class="mb-3">
-    <p>Email : ${utilisateur.email}</p>
+    <p><i>Email : </i>${utilisateur.email}</p>
 </div>
 <div class="mb-3">
-    <p>Telephone : ${utilisateur.telephone}</p>
+    <p><i>Telephone : </i>${utilisateur.telephone}</p>
 </div>
 <div class="mb-3">
-    <p>Rue : ${utilisateur.rue}</p>
+    <p><i>Rue : </i>${utilisateur.rue}</p>
 </div>
 <div class="mb-3">
-    <p>Code Postal : ${utilisateur.codePostal}</p>
+    <p><i>Code Postal : </i>${utilisateur.codePostal}</p>
 </div>
 <div class="mb-3">
-    <p>Ville : ${utilisateur.ville}</p>
+    <p><i>Ville : </i>${utilisateur.ville}</p>
 </div>
 </div>
 </body>

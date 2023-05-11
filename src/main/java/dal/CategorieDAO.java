@@ -7,6 +7,7 @@ import bo.Categorie;
 /*
  * Définition des méthodes utilisées auprès de la BDD
  */
+
 public interface CategorieDAO {
 	List<Categorie> selectAll();
 	Categorie selectById(int id);

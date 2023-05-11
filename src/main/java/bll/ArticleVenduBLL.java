@@ -19,6 +19,7 @@ public class ArticleVenduBLL {
 		return dao.selectById(no_article);
 	}
 	
+
 	public ArticleVendu ajouterArticleVendu(String nom_article,String description,Date date_debut_enchere,Date date_fin_enchere,Integer prix_initial, Utilisateur utilisateur, Categorie categorie) throws BLLException
 	{
 		

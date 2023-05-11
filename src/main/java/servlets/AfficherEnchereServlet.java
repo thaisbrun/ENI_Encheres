@@ -18,7 +18,8 @@ import bo.Enchere;
 import bo.Utilisateur;
 
 /**
- * Servlet implementation class EnchereServlet
+ * Servlet servant à afficher le détail de l'enchère liée à un article et à un utilisateur concerné. 
+ * Page associée : afficherEnchere.jsp
  */
 @WebServlet("/voirEnchere")
 public class AfficherEnchereServlet extends HttpServlet {

@@ -17,25 +17,35 @@ import dal.ConnectionProvider;
 import dal.EnchereDAO;
 import dal.UtilisateurDAO;
 
+/*
+ * Implémentation des méthodes proposées par EnchereDAO
+ */
 public class EnchereDAOJdbcImpl implements EnchereDAO{
 
+<<<<<<< Upstream, based on branch 'master' of https://github.com/thaisbrun/ENI_Encheres.git
 	private static final String SELECT_ALL = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON ENCHERES.no_utilisateur = u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON ENCHERES.no_article = a.no_article;";
+=======
+	//Requêtes SQL
+	private static final String SELECT_ALL = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON ENCHERES.no_utilisateur = u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON ENCHERES.no_article = a.no_article WHERE etat_vente= 'EC' OR etat_vente='CR';";
+>>>>>>> a6862b3 J-1 avant l'oral
 	private static final String SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?;";
 	private static final String SELECT_BY_CATEGORIE = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS u ON encheres.no_utilisateur=u.no_utilisateur INNER JOIN ARTICLES_VENDUS a ON encheres.no_article = a.no_article WHERE no_categorie = ? AND nom_article LIKE ?;";
 
-	//private static final String SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ?;";
-	
 	UtilisateurDAO utilisateurDAO = new UtilisateurDAOJdbcImpl();
 	ArticleVenduDAO articleDAO = new ArticleVenduDAOJdbcImpl();
 
 	@Override
 	public List<Enchere> selectAll() {
 		List<Enchere> listeEncheres = new ArrayList<Enchere>();
+		//Ouverture de la connexion
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
+			//Préparation de la requête
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
+			//Exécution de la requête
 			ResultSet rs = pstmt.executeQuery();
 			Enchere enchere=new Enchere();
+			//Ajout des objets dans la liste
 			while(rs.next())
 			{
 				enchere = enchereBuilder(rs);
@@ -53,15 +63,17 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	@Override
 	public List<Enchere> selectByCategorie(int no_categorie, String nom_article) {
 		List<Enchere> listeEncheres = new ArrayList<Enchere>();
+		//Ouverture de la connexion
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
+			//Préparation de la requête
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_CATEGORIE);
-			// 3e etape : attribuer les parametres nécessaires à ma requête
 			pstmt.setInt(1, no_categorie);
 			pstmt.setString(2, "%" + nom_article + "%");
-			
+			//Exécution de la requête
 			ResultSet rs = pstmt.executeQuery();
 			Enchere enchere=new Enchere();
+			//Ajout des objets à la liste
 			while(rs.next())
 			{
 				enchere = enchereBuilder(rs);
@@ -95,12 +107,15 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	@Override
 	public Enchere selectById(int no_utilisateur, int no_article) {
 		Enchere enchere = new Enchere();
+		//Ouverture de la connexion BDD
 		try (Connection cnx = ConnectionProvider.getConnection();) {
+			//Préparation de la requête
 			PreparedStatement ps = cnx.prepareStatement(SELECT_BY_ID);
 			
 			ps.setInt(1, no_utilisateur);
 			ps.setInt(2, no_article);
 			
+			//Exécution de la requête
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				enchere = enchereBuilder(rs);

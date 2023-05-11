@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Connexion utilisateur</title>
-<body>
+<body style="background-color:#B6DFF6;">
 <div class="container text-center">
 <br>
 <form name="connexionForm" method="post" action="connexion">    

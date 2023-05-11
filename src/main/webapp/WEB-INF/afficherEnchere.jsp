@@ -8,9 +8,11 @@
 <meta charset="ISO-8859-1">
 <title>Détails de nomArticle</title>
 </head>
-<body>
+<body style="background-color:#B6DFF6;">
 	<div class="container text-center" style="margin-top:25px">
-		<h2>Détails de l'enchere</h2>
+
+		<h2>Détails de ${enchere.getArticle().getNomArticle()} </h2>
+		<br>
 	</div>
 	<c:choose>
   	<c:when test="${not empty erreur }">
@@ -20,26 +22,24 @@
   	</c:when>
   	</c:choose>
   	<form name="afficherEnchere" method="get" action="voirEnchere">
-  		<div class="container" style="margin:auto;">
   			<div class="row">
     			<div class="col">
-      				<div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-1.jpg" alt="" class="img-fluid card-img-top" style="display: block; max-width:100%; height: auto;"> 
+      				<img src="./img/image.jpg" class="img-fluid card-img-top" style="margin-left:50px;width:50%;"> 
     			</div>
     			<div class="col">
-    				<p>${enchere.getUtilisateur().getNo_utilisateur()}</p>
-      				<p>${enchere.getArticle().getNomArticle() }</p>
-      				<p>${enchere.getUtilisateur().getPseudo() }</p>
-      				<p>${enchere.getArticle().getDescription() }</p>
-      				<p>Catégorie</p>
+    			<br>
+      				<h3>${enchere.getArticle().getNomArticle() }</h3>
+      				<h4> Vendu par : ${enchere.getUtilisateur().getPseudo() }</h4>
+      				<h4>${enchere.getArticle().getDescription() }</h4>
       				
-      				<p>${enchere.getArticle().getMiseAPrix() }</p>
-      				<p>${enchere.getMontant_enchere() }</p>
+      				<h4> Prix initial : ${enchere.getArticle().getMiseAPrix() }</h4>
+      				<h4> Montant de la dernière enchère : ${enchere.getMontant_enchere() }</h4>
       				
-      				<p>Adresse<p>
-      				<p>${enchere.getArticle().getDate_debut_enchere() }</p>
-      				<p>${enchere.getArticle().getDate_fin_enchere() }</p>
+      				<h3><i>Adresse de retrait : </i><h3>
+      				<h4>Date de début de l'enchère: ${enchere.getArticle().getDate_debut_enchere() }</h4>
+      				<h4>Date de fin de l'enchère: ${enchere.getArticle().getDate_fin_enchere() }</h4>
       				
-      				<p>${enchere.getArticle().getEtatVente() }</p>
+      				<h4> Etat de la vente : ${enchere.getArticle().getEtatVente() }</h4>
     			</div>
     		</div>
   		</div>

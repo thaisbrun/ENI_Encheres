@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ErreurServlet
+ * Servlet servant à afficher une page d'erreur suite à la connexion.
+ * Page associée : erreur.jsp
  */
 @WebServlet("/erreur")
 public class ErreurServlet extends HttpServlet {
@@ -28,6 +29,7 @@ public class ErreurServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//Lien vers la JSP
 		request.getRequestDispatcher("/WEB-INF/erreur.jsp").forward(request, response);
 
 	}

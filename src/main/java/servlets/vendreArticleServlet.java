@@ -20,7 +20,8 @@ import bo.Categorie;
 import bo.Utilisateur;
 
 /**
- * Servlet implementation class vendreArticle
+ * Servlet servant à ajouter un article sur le site. 
+ * Page associée : vendreArticle.jsp
  */
 @WebServlet("/vendreArticle")
 public class vendreArticleServlet extends HttpServlet {
@@ -41,15 +42,21 @@ public class vendreArticleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Je récupère le profil utilisateur 
 	    Utilisateur utilisateur = new Utilisateur();
 	    request.setAttribute("utilisateur", utilisateur);
 	    
+	    //Initialisation de la classe 
 	    Categorie categorie = new Categorie();
+	    
+	    //Création de la liste des catégories
 		List<Categorie> listeCategories = null;
-		listeCategories = categorieBLL.selectAll();
 		
+		//Appel de la requête SQL
+		listeCategories = categorieBLL.selectAll();
 		request.setAttribute("listeCategories", listeCategories);
+		
+		//Lien vers la JSP
 		
 		request.getRequestDispatcher("/WEB-INF/vendreArticle.jsp").forward(request, response);
 	}
@@ -58,46 +65,58 @@ public class vendreArticleServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
- // read form fields
 		
+		//Récupération des attributs nécessaire à l'ajout
         String nom_article = request.getParameter("nom_article");
         String description = request.getParameter("description");
+        
+        //Gestion de la première date  
         String date_debut_enchereStr = request.getParameter("date_debut_enchere");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date_debut_enchere = null;
 		try {
 			date_debut_enchere = sdf.parse(date_debut_enchereStr);
 		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
+			// Erreur si date incorrecte
 			e2.printStackTrace();
 		}
+		
+        //Gestion de la seconde date  
         String date_fin_enchereStr = request.getParameter("date_fin_enchere");    
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         Date date_fin_enchere = null;
 		try {
 			date_fin_enchere = sdf2.parse(date_fin_enchereStr);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			// Erreur si date incorrecte
 			e1.printStackTrace();
 		}
+		
         int prix_initial = Integer.parseInt(request.getParameter("prix_initial"));
-        //Utilisateur utilisateur = (Utilisateur) request.getParameter("")
-        // do some processing here...
+
+        //On récupère l'utilisateur de la session
         Utilisateur utilisateur = ((Utilisateur) request.getSession().getAttribute("user"));
+        
+        //On récupère l'id de la catégorie selectionnée 
         int categorie = Integer.parseInt(request.getParameter("categorie"));
+        
+        //On initie la couche BLL 
         ArticleVenduBLL articleVenduBll = new ArticleVenduBLL();
-        System.out.println(categorie);
+        //On essaye de créer un article et de l'ajouter 
         try {
+        	//Appel de la requête SQL
         	articleVenduBll.ajouterArticleVendu(nom_article,description,date_debut_enchere,date_fin_enchere,prix_initial, utilisateur, new Categorie(categorie, ""));
 
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/afficherProfil.jsp");
+        	//Lien vers la JSP
+			RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
 			rd.forward(request, response);
 			
 		} catch (BLLException e) {
 			System.out.println(e.getMessage());
 			request.setAttribute("erreur", e.getMessage());
 			
-			RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
+			//Lien vers la JSP
+			RequestDispatcher rd = request.getRequestDispatcher("./vendreArticle.jsp");
 			rd.forward(request, response);
 			
 		}

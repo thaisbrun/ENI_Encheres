@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class deconnexionServlet
+ * Servlet servant à déconnecter l'utilisateur. 
+ * Page associée : deconnexion.jsp
  */
 @WebServlet("/deconnexion")
 public class deconnexionServlet extends HttpServlet {
@@ -20,17 +21,16 @@ public class deconnexionServlet extends HttpServlet {
      */
     public deconnexionServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Lors de la déconnexion la session est détruite
 		HttpSession session = request.getSession();
 		session.invalidate();
-
+		//Lien vers la JSP
 		request.getRequestDispatcher("./index.jsp").forward(request, response);
 	}
 

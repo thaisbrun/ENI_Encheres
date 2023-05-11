@@ -11,7 +11,8 @@ import bll.UtilisateurBLL;
 import bo.Utilisateur;
 
 /**
- * Servlet implementation class afficherUtilisateurServlet
+ * Servlet servant à afficher le détail du profil d'un utilisateur sélectionné.  
+ * Page associée : afficherUtilisateur.jsp
  */
 @WebServlet("/afficherUtilisateur")
 public class afficherUtilisateurServlet extends HttpServlet {
@@ -29,11 +30,17 @@ public class afficherUtilisateurServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
-    	UtilisateurBLL utilisateurBll = new UtilisateurBLL();
+    	UtilisateurBLL utilisateurBll = new UtilisateurBLL();		
+    	
+    	// Pour afficher un utilisateur sélectionné, je le récupère grâce à son id (no_utilisateur). 
+
         int no_utilisateur = Integer.parseInt(request.getParameter("no_utilisateur"));	
+        
+        //Utilisation d'une requête SQL 
+        
 		Utilisateur utilisateur = utilisateurBll.selectById(no_utilisateur);
+		
 		request.setAttribute("utilisateur", utilisateur);
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());

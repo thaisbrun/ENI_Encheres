@@ -4,12 +4,11 @@ h1{
 	text-align:center;
 }
 
-body {
-  background: blue;
+h3{
+	text-align:center;
+	font-style:italic;
 }
 
-.banner {
-  background: #a770ef;
-  background: -webkit-linear-gradient(to right, #a770ef, #cf8bf3, #fdb99b);
-  background: linear-gradient(to right, #a770ef, #cf8bf3, #fdb99b);
+h5{
+	color:#B6DFF6;
 }

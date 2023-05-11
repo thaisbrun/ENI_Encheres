@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import conf.Settings;
 
+//Informations de connexion 
+
 public class JdbcTools {
 	private static String urldb;
 	private static String userdb;

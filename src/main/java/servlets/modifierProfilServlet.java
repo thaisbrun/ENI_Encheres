@@ -13,7 +13,8 @@ import bll.UtilisateurBLL;
 import bo.Utilisateur;
 
 /**
- * Servlet implementation class modifierProfil
+ * Servlet servant à modifier son profil. 
+ * Page associée : modifierProfil.jsp
  */
 @WebServlet("/modifierProfil")
 public class modifierProfilServlet extends HttpServlet {
@@ -31,13 +32,12 @@ public class modifierProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		/* HttpSession session = request.getSession();
-		System.out.print (request.getSession().getId());
-		Utilisateur u = (Utilisateur) session.getAttribute("user"); */
+		// On récupère l'utilisateur 
 	    Utilisateur utilisateur = new Utilisateur();
 	    request.setAttribute("utilisateur", utilisateur);
 
+	    
+	    //Lien vers la JSP
 		request.getRequestDispatcher("/WEB-INF/modifierProfil.jsp").forward(request, response);
 	
 	}

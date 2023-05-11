@@ -10,10 +10,14 @@ import dal.impl.UtilisateurDAOJdbcImpl;
  */
 public abstract class DAOFactory {
 	
+	//Propriétés 
+	
 	private static CategorieDAO categorieDAO;
 	private static UtilisateurDAO utilisateurDAO;
 	private static ArticleVenduDAO articleVenduDAO;
 	private static EnchereDAO enchereDAO;
+	
+	//Accesseurs
 	
 	public static CategorieDAO getCategorieDAO() {
 		if (categorieDAO == null) {
