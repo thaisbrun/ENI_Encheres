@@ -20,6 +20,7 @@ import dal.UtilisateurDAO;
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	private static final String SELECT_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?;";
 	private static final String INSERT = "INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_enchere,date_fin_enchere,prix_initial,prix_vente,no_utilisateur,no_categorie,etat_vente,image) VALUES(?,?,?,?,?,null,?,?,'CR',?)";
+	private static final String UPDATE ="UPDATE ARTICLES_VENDUS SET nom_article = ?, description=?, date_debut_enchere=?, date_fin_enchere=? , prix_initial=? WHERE no_article = ?;";
 	
 	UtilisateurDAO utilisateurDAO = new UtilisateurDAOJdbcImpl();
 	CategorieDAO categorieDAO = new CategorieDAOJdbcImpl();
@@ -86,6 +87,29 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			e.printStackTrace();
 		}
 		return resultat;
+	}
+
+	@Override
+	public void update(ArticleVendu article) {
+		// 1e etape : ouvrir la connexion a la bdd
+				try (Connection cnx = ConnectionProvider.getConnection();) {
+					// 2e etape : preparer la requete SQL qu'on souhaite executer
+					PreparedStatement ps = cnx.prepareStatement(UPDATE);
+					// 4e etape : execution de la requete et interpretation des resultats
+					
+					ps.setString(1, article.getNomArticle());
+					ps.setString(2, article.getDescription());
+					ps.setDate(3, new java.sql.Date(article.getDate_debut_enchere().getTime()));
+					ps.setDate(4, new java.sql.Date(article.getDate_fin_enchere().getTime()));
+					ps.setInt(5, article.getMiseAPrix());
+					ps.setInt(6, article.getNoArticle());
+					ps.executeUpdate();
+					cnx.commit();
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		
 	}
 
 }

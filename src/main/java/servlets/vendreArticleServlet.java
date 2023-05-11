@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import bll.ArticleVenduBLL;
 import bll.BLLException;
 import bll.CategorieBLL;
-import bll.UtilisateurBLL;
 import bo.Categorie;
 import bo.Utilisateur;
 

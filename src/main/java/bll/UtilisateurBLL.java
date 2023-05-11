@@ -87,14 +87,6 @@ public class UtilisateurBLL {
 		return utilisateur;
 	}
 	
-	public void utilisateurEncherie(Utilisateur utilisateur, int credit) {
-		
-	}
-	
-	public void utilisateurVend(Utilisateur utilisateur, int credit) {
-		
-	}
-	
 	public String formatAdresse(Utilisateur utilisateur) {
 		String rue = utilisateur.getRue();
 		String ville = utilisateur.getVille();	

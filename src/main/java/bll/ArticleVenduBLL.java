@@ -15,8 +15,8 @@ public class ArticleVenduBLL {
 		dao = DAOFactory.getArticleVenduDAO();
 	}
 	
-	public ArticleVendu selectById(int no_artilce) {
-		return dao.selectById(no_artilce);
+	public ArticleVendu selectById(int no_article) {
+		return dao.selectById(no_article);
 	}
 	
 	public ArticleVendu ajouterArticleVendu(String nom_article,String description,Date date_debut_enchere,Date date_fin_enchere,Integer prix_initial, Utilisateur utilisateur, Categorie categorie) throws BLLException
@@ -34,6 +34,19 @@ public class ArticleVenduBLL {
 			this.dao.insert(articleVendu);
 			
 		return articleVendu;
+	}
+	
+	public void modifierArticleVendu(String nomArticle, String description, Date debut, Date fin, int prixInitial, int no_article) {
+		ArticleVenduBLL articleBLL = new ArticleVenduBLL();
+		ArticleVendu article = articleBLL.selectById(no_article);
+		
+		article.setNomArticle(nomArticle);
+		article.setDescription(description);
+		article.setDate_debut_enchere(debut);
+		article.setDate_fin_enchere(fin);
+		article.setMiseAPrix(prixInitial);
+		
+		this.dao.update(article);
 	}
 	
 	//VERIFICATION

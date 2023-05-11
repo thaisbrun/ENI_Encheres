@@ -83,7 +83,7 @@ public class ArticleVendu {
 		this.date_fin_enchere = date_fin_enchere;
 	}
 
-	public double getMiseAPrix() {
+	public int getMiseAPrix() {
 		return prix_initial;
 	}
 
@@ -91,7 +91,7 @@ public class ArticleVendu {
 		this.prix_initial = prix_initial;
 	}
 
-	public double getPrixVente() {
+	public int getPrixVente() {
 		return prix_vente;
 	}
 

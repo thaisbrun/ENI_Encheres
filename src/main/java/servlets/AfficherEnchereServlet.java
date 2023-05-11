@@ -43,7 +43,7 @@ public class AfficherEnchereServlet extends HttpServlet {
 		int no_article = Integer.parseInt(request.getParameter("no_article"));
 		
 		Enchere enchere = enchereBLL.selectById(no_utilisateur, no_article);
-		System.out.println("Enchere: " + enchere.toString() + enchere.getArticle() + enchere.getUtilisateur().getPseudo());
+		System.out.println("Enchere: " + enchere.toString() + enchere.getArticle() + enchere.getUtilisateur());
 		
 		request.setAttribute("enchere", enchere);
 		request.setAttribute("estVendeur", utilisateurBLL.estVendeur(vendeur, utilisateurConnecete));
@@ -63,13 +63,14 @@ public class AfficherEnchereServlet extends HttpServlet {
 		try {
 			Utilisateur vendeur = utilisateurBLL.selectById(Integer.parseInt(request.getParameter("no_utilisateur")));
 			Enchere enchere = enchereBLL.selectById(Integer.parseInt(request.getParameter("no_utilisateur")), Integer.parseInt(request.getParameter("no_article")));
-			utilisateurBLL.validationModifEnchere(vendeur, utilisateurConnecete);
-			articleBLL.validationEnchere(enchere.getArticle());
+			//utilisateurBLL.validationModifEnchere(vendeur, utilisateurConnecete);
+			//articleBLL.validationEnchere(enchere.getArticle());
 			
+			request.setAttribute("enchere", enchere);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modifierEnchere.jsp");
 			rd.forward(request, response);
 			
-		} catch (BLLException e) {
+		} catch (Exception e) {
 			Enchere enchere = enchereBLL.selectById(Integer.parseInt(request.getParameter("no_utilisateur")), Integer.parseInt(request.getParameter("no_article")));
 			
 			request.setAttribute("erreur", e.getMessage());

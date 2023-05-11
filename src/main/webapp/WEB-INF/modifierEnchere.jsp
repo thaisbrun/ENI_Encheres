@@ -11,25 +11,30 @@
 <body>
 <div class="container text-center">
   <div class="row align-items-start">
-  <form name="modificationForm" method="post" action="modifierProfil">
+  <form name="modificationEnchereForm" method="post" action="modifierEnchere">
 <div class="col">
 <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Pseudo</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${enchere.getUtilisateur().getPseudo()}" name="pseudo" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="exampleInputEmail1" class="form-label">Nom Article</label>
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${enchere.getArticle().getNomArticle()}" name="nomArticle" id="exampleInputNom" aria-describedby="emailHelp">
+</div>
+<div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Description</label>
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${enchere.getArticle().getDescription()}" name="descriptionArticle" id="exampleInputDescription" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Date Debut Enchere</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.prenom}" name="prenom" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${enchere.getArticle().getDate_debut_enchere()}" name="dateDebutArticle" id="exampleInputDebut" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Date Fin Enchere</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.prenom}" name="prenom" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${enchere.getArticle().getDate_fin_enchere()}" name="dateFinArticle" id="exampleInputFin" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Telephone</label>
-    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${user.telephone}" name="telephone" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="exampleInputEmail1" class="form-label">Prix Initial</label>
+    <input type="text" style="width:300px;margin-left:500px;" class="form-control" value="${enchere.getArticle().getMiseAPrix()}" name="prixArticle" id="exampleInputPrix" aria-describedby="emailHelp">
 </div>
 </div>
+<input name="no_article" value="${enchere.getArticle().getNoArticle()}" type="hidden">
 <button type="submit" class="btn btn-primary">Enregistrer</button>
 </form>
 <a href="" class="btn btn-primary">Supprimer l'enchere</a>
